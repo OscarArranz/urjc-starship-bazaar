@@ -12,4 +12,6 @@ public interface SpaceshipBuilder {
 
     SpaceshipBuilder setPropellers(List<Propeller> propellers);
 
+    SpaceshipBuilder setCrewNum(int crewNum);
+
 }

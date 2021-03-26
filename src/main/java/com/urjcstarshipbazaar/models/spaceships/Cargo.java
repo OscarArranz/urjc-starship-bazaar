@@ -10,9 +10,9 @@ public class Cargo extends Spaceship {
   private double maxLoadTons;
   private DefenseSystem defense;
 
-  public Cargo(String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
+  public Cargo(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
                double maxLoadTons, DefenseSystem defense) {
-    super(registerNum, ownerId, propellers, crewNum);
+    super(id, registerNum, ownerId, propellers, crewNum);
     this.maxLoadTons = maxLoadTons;
     this.defense = defense;
   }
