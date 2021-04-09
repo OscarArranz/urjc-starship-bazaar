@@ -34,9 +34,7 @@ public class SpaceshipDao implements SpaceshipDaoInterface {
     }
 
     public List<Spaceship> getSpaceshipByUserid(int id) {
-        List<Spaceship> lista = new ArrayList<Spaceship>();
-
-
+        List<Spaceship> list = new ArrayList<Spaceship>();
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
             Statement statement = connection.createStatement();
@@ -44,20 +42,20 @@ public class SpaceshipDao implements SpaceshipDaoInterface {
             ResultSet results = statement.executeQuery("SELECT * FROM spaceships WHERE owner_id = " + id + ";");
 
             while(results.next()) {
-                String tipoNave = results.getString("spaceship_type");
+                String shipType = results.getString("spaceship_type");
                 //¿Factory Builder??
                 //si es destroyer, o si es fighter...
-                DestroyerBuilder nave = new DestroyerBuilder()
+                DestroyerBuilder ship = new DestroyerBuilder()
                         .setOwnerId(results.getInt("id"))
                         .setRegisterNum(results.getString("register_num"))
                         .setCrewNum(results.getInt("crew_num"));
-                lista.add(nave.getSpaceship());
+                list.add(ship.getSpaceship());
             }
             connection.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return list;
     }
 
     public void deleteSpaceshipByUserId(Spaceship spaceship) {
