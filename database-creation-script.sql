@@ -3,9 +3,10 @@ create table users(
     name text not null,
     nickname text not null unique,
     email text not null unique,
-    password text not null unique,
+    password text not null,
     origin_planet text,
-    species text
+    species text,
+    spacial_license text unique
 );
 
 create table spaceships(
