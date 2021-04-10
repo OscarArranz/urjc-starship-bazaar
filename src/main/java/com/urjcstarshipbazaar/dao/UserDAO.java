@@ -26,8 +26,7 @@ public class UserDAO implements UserDAOInterface {
 
             connection.close();
         } catch (SQLException e) {
-            if(e.getErrorCode() == 19) throw new UserDAOException("User already exists!" ,e);
-            e.printStackTrace();
+            checkExisting(e, "User already exists!");
         }
     }
 
@@ -68,7 +67,6 @@ public class UserDAO implements UserDAOInterface {
     }
 
     public String getLicenseById(int id) throws UserDAOException {
-        Client client = new Client();
         String license = "";
 
         try {
@@ -102,7 +100,7 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
-    public void saveLicense(String license, int userId) throws Exception {
+    public void saveLicense(String license, int userId) throws UserDAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
@@ -110,9 +108,13 @@ public class UserDAO implements UserDAOInterface {
             statement
                     .executeUpdate("UPDATE users SET spacial_license = '" + license + "' WHERE id = " + userId);
         } catch (SQLException e) {
-            if(e.getErrorCode() == 19) throw new UserDAOException("License already exists!");
-            e.printStackTrace();
+            checkExisting(e, "License already exists!");
         }
+    }
+
+    public void checkExisting(SQLException e, String errorMessage) throws UserDAOException {
+        if(e.getErrorCode() == 19) throw new UserDAOException(errorMessage, e);
+        e.printStackTrace();
     }
 
 }

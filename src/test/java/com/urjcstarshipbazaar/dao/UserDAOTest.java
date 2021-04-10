@@ -15,27 +15,17 @@ public class UserDAOTest {
 
         try {
             userDAO.save(client, "pass123");
-        } catch (Exception e) {
+
+            Client retrievedClient1 = (Client) userDAO.getByNickname("robiin");
+            Client retrievedClient2 = (Client) userDAO.getByEmail("robiin@email.com");
+
+            userDAO.deleteById(retrievedClient1.getId()); // Clean-up
+
+            assertEquals(client.getEmail(), retrievedClient1.getEmail());
+            assertEquals(client.getNickname(), retrievedClient2.getNickname());
+        } catch (UserDAOException e) {
             System.out.println(e.getMessage());
         }
-
-        Client retrievedClient1 = null;
-        Client retrievedClient2 = null;
-        try {
-            retrievedClient1 = (Client) userDAO.getByNickname("robiin");
-            retrievedClient2 = (Client) userDAO.getByEmail("robiin@email.com");
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            userDAO.deleteById(retrievedClient1.getId()); // Clean-up
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(client.getEmail(), retrievedClient1.getEmail());
-        assertEquals(client.getNickname(), retrievedClient2.getNickname());
     }
 
     @Test
@@ -46,33 +36,17 @@ public class UserDAOTest {
 
         try {
             userDAO.save(client, "pass123");
-        } catch (Exception e) {
+
+            Client retrievedClient1 = (Client) userDAO.getByNickname("robiin");
+            assertEquals(client.getEmail(), retrievedClient1.getEmail());
+
+            userDAO.deleteById(retrievedClient1.getId());
+
+            Client retrievedClient2 = (Client) userDAO.getByNickname("robiin");
+            assertNull(retrievedClient2.getEmail());
+        } catch (UserDAOException e) {
             System.out.println(e.getMessage());
         }
-
-        Client retrievedClient1 = null;
-        try {
-            retrievedClient1 = (Client) userDAO.getByNickname("robiin");
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(client.getEmail(), retrievedClient1.getEmail());
-
-        try {
-            userDAO.deleteById(retrievedClient1.getId());
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        Client retrievedClient2 = null;
-        try {
-            retrievedClient2 = (Client) userDAO.getByNickname("robiin");
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        assertNull(retrievedClient2.getEmail());
     }
 
     @Test(expected = UserDAOException.class)
@@ -82,38 +56,24 @@ public class UserDAOTest {
         String license = "9127AHJGSA";
         UserDAO userDAO = new UserDAO();
 
+        Client retrievedClient = new Client();
+
         try {
             userDAO.save(client, "pass123");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
-        Client retrievedClient = null;
-        try {
             retrievedClient = (Client) userDAO.getByNickname("robiin");
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
 
-        try {
             userDAO.saveLicense(license, retrievedClient.getId());
-        } catch (Exception e) {
+
+            String retrievedLicense1 = userDAO.getLicenseById(retrievedClient.getId());
+            assertEquals(license, retrievedLicense1);
+
+            userDAO.deleteById(retrievedClient.getId());
+        } catch (UserDAOException e) {
             System.out.println(e.getMessage());
         }
-
-        String retrievedLicense1 = null;
-        try {
-            retrievedLicense1 = userDAO.getLicenseById(retrievedClient.getId());
-        } catch (UserDAOException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(license, retrievedLicense1);
-
-        userDAO.deleteById(retrievedClient.getId());
 
         String retrievedLicense2 = userDAO.getLicenseById(retrievedClient.getId());
-
         assertNull(retrievedLicense2);
     }
 }

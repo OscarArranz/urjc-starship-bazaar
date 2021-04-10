@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="urjcStarshipBazaar" target="6" />
+      <module name="urjcStarshipBazaar" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
