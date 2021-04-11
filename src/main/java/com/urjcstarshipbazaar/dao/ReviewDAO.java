@@ -36,6 +36,9 @@ public class ReviewDAO implements ReviewDAOInterface {
 
                 reviews.add(review);
             }
+
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new DAOException("Reviews not found", e);
         }
@@ -53,6 +56,7 @@ public class ReviewDAO implements ReviewDAOInterface {
                     + STRINGMARKUP + SEPARATOR + review.getScore() + SEPARATOR + review.getVendor().getId()
                     + SEPARATOR + review.getBuyer().getId() + ")");
 
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new DAOException(e.getMessage(), e);
@@ -67,9 +71,11 @@ public class ReviewDAO implements ReviewDAOInterface {
 
             statement.executeUpdate("DELETE FROM reviews WHERE id = " + id);
 
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new DAOException(e.getMessage(), e);
         }
     }
+
 }

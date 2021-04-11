@@ -6,6 +6,7 @@ import java.util.List;
 
 public abstract class Spaceship {
 
+  private int id;
   private String registerNum;
   private int ownerId;
   private List<Propeller> propellers;
@@ -16,6 +17,10 @@ public abstract class Spaceship {
     this.ownerId = ownerId;
     this.propellers = propellers;
     this.crewNum = crewNum;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getRegisterNum() {
