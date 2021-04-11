@@ -1,6 +1,6 @@
 package com.urjcstarshipbazaar.dao;
 
-import com.urjcstarshipbazaar.dao.exceptions.UserDAOException;
+import com.urjcstarshipbazaar.dao.exceptions.DAOException;
 import com.urjcstarshipbazaar.models.Client;
 import com.urjcstarshipbazaar.models.User;
 
@@ -13,7 +13,7 @@ public class UserDAO implements UserDAOInterface {
     private final char STRINGMARKUP = '\'';
 
     @Override
-    public void save(User user, String password) throws UserDAOException {
+    public void save(User user, String password) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
@@ -31,16 +31,43 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
-    public User getByNickname(String nickname) throws UserDAOException {
+    public User getById(int id) throws DAOException {
+        Client client = new Client();
+
+        try {
+            Connection connection = DriverManager.getConnection(CONNECTION_URL);
+            Statement statement = connection.createStatement();
+
+            ResultSet results = statement
+                    .executeQuery("SELECT * FROM users WHERE id = " + id);
+
+            while(results.next()) {
+                client.setId(results.getInt("id"));
+                client.setName(results.getString("name"));
+                client.setNickname(results.getString("nickname"));
+                client.setEmail(results.getString("email"));
+                client.setOriginPlanet(results.getString("origin_planet"));
+                client.setSpecies(results.getString("species"));
+            }
+
+            connection.close();
+        } catch (SQLException e) {
+            throw new DAOException("User not found!", e);
+        }
+        return client;
+    }
+
+    @Override
+    public User getByNickname(String nickname) throws DAOException {
         return getByStringValueWithField(nickname, "nickname");
     }
 
     @Override
-    public User getByEmail(String email) throws UserDAOException {
+    public User getByEmail(String email) throws DAOException {
         return getByStringValueWithField(email, "email");
     }
 
-    public User getByStringValueWithField(String value, String field) throws UserDAOException {
+    public User getByStringValueWithField(String value, String field) throws DAOException {
         Client client = new Client();
 
         try {
@@ -61,12 +88,12 @@ public class UserDAO implements UserDAOInterface {
 
             connection.close();
         } catch (SQLException e) {
-            throw new UserDAOException("User not found!", e);
+            throw new DAOException("User not found!", e);
         }
         return client;
     }
 
-    public String getLicenseById(int id) throws UserDAOException {
+    public String getLicenseById(int id) throws DAOException {
         String license = "";
 
         try {
@@ -80,15 +107,15 @@ public class UserDAO implements UserDAOInterface {
                 license = results.getString("spacial_license");
             }
         } catch (SQLException e) {
-            throw new UserDAOException("License not found", e);
+            throw new DAOException("License not found", e);
         }
 
-        if(license.equals("")) throw new UserDAOException("License not found!");
+        if(license.equals("")) throw new DAOException("License not found!");
 
         return license;
     }
 
-    public void deleteById(int id) throws UserDAOException {
+    public void deleteById(int id) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
@@ -96,11 +123,11 @@ public class UserDAO implements UserDAOInterface {
             statement
                     .executeUpdate("DELETE FROM Users WHERE id = '" + id + "'");
         } catch (SQLException e) {
-            throw new UserDAOException("Couldn't delete user!", e);
+            throw new DAOException("Couldn't delete user!", e);
         }
     }
 
-    public void saveLicense(String license, int userId) throws UserDAOException {
+    public void saveLicense(String license, int userId) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
@@ -112,8 +139,8 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
-    public void checkExisting(SQLException e, String errorMessage) throws UserDAOException {
-        if(e.getErrorCode() == 19) throw new UserDAOException(errorMessage, e);
+    public void checkExisting(SQLException e, String errorMessage) throws DAOException {
+        if(e.getErrorCode() == 19) throw new DAOException(errorMessage, e);
         e.printStackTrace();
     }
 

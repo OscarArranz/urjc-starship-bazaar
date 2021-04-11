@@ -1,6 +1,6 @@
 package com.urjcstarshipbazaar.dao;
 
-import com.urjcstarshipbazaar.dao.exceptions.UserDAOException;
+import com.urjcstarshipbazaar.dao.exceptions.DAOException;
 import com.urjcstarshipbazaar.models.Client;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class UserDAOTest {
 
             assertEquals(client.getEmail(), retrievedClient1.getEmail());
             assertEquals(client.getNickname(), retrievedClient2.getNickname());
-        } catch (UserDAOException e) {
+        } catch (DAOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -44,13 +44,13 @@ public class UserDAOTest {
 
             Client retrievedClient2 = (Client) userDAO.getByNickname("robiin");
             assertNull(retrievedClient2.getEmail());
-        } catch (UserDAOException e) {
+        } catch (DAOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    @Test(expected = UserDAOException.class)
-    public void saveGetAndDeleteLicense() throws UserDAOException {
+    @Test(expected = DAOException.class)
+    public void saveGetAndDeleteLicense() throws DAOException {
         Client client = new Client("Robin", "robiin", "robiin@email.com", "Mars",
                 "Martian");
         String license = "9127AHJGSA";
@@ -69,7 +69,7 @@ public class UserDAOTest {
             assertEquals(license, retrievedLicense1);
 
             userDAO.deleteById(retrievedClient.getId());
-        } catch (UserDAOException e) {
+        } catch (DAOException e) {
             System.out.println(e.getMessage());
         }
 
