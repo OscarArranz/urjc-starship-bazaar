@@ -3,9 +3,10 @@ create table users(
     name text not null,
     nickname text not null unique,
     email text not null unique,
-    password text not null unique,
+    password text not null,
     origin_planet text,
-    species text
+    species text,
+    spacial_license text unique
 );
 
 create table spaceships(
@@ -22,7 +23,7 @@ create table propellers(
     id integer primary key not null unique,
     spaceship_id integer not null,
     propeller_type text not null,
-    max_speed_megameters_per_hour real not null,
+    max_speed_megametres_per_hour real not null,
 
     foreign key(spaceship_id) references spaceships(id) on delete cascade on update cascade
 );
@@ -42,7 +43,7 @@ create table shields(
     max_damage_gigajoules real not null,
     required_energy_gigacoulombs real not null,
 
-    foreig key(spaceship_id) references spaceships(id) on delete cascade on update cascade
+    foreign key(spaceship_id) references spaceships(id) on delete cascade on update cascade
 );
 
 
@@ -50,7 +51,7 @@ create table armors(
     id integer primary key not null unique,
     spaceship_id integer not null,
     material text not null,
-    weigth_tons real not null,
+    weight_tons real not null,
 
     foreign key(spaceship_id) references spaceships(id) on delete cascade on update cascade
 );
@@ -89,12 +90,12 @@ create table offer_spaceship(
     foreign key(spaceship_id) references spaceships(id) on delete cascade on update cascade
 );
 
-create table review(
+create table reviews(
     id integer primary key not null unique,
     comment text not null,
     score real not null,
     vendor_id integer not null,
-    writer_id integer not null,
+    buyer_id integer not null,
 
-    foreign key(vendor_id, writer_id) references users(id, id) on delete cascade on update cascade
+    foreign key(vendor_id, buyer_id) references users(id, id) on delete cascade on update cascade
 );

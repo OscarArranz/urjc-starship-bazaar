@@ -20,7 +20,9 @@ public abstract class Spaceship {
     this.crewNum = crewNum;
   }
 
-  public int getId() { return id; }
+  public int getId() {
+    return id;
+  }
 
   public String getRegisterNum() {
     return registerNum;
