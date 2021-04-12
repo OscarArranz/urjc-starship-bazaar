@@ -11,9 +11,9 @@ public class Fighter extends Spaceship {
   private List<Weapon> weapons;
   private DefenseSystem defense;
 
-  public Fighter(String registerNum, int ownerId, List<Propeller> propellers,
+  public Fighter(int id, String registerNum, int ownerId, List<Propeller> propellers,
                  List<Weapon> weapons, DefenseSystem defense) {
-    super(registerNum, ownerId, propellers, 1);
+    super(id, registerNum, ownerId, propellers, 1);
     this.weapons = weapons;
     this.defense = defense;
   }

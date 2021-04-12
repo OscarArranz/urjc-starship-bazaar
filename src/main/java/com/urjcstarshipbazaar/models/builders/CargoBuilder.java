@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CargoBuilder implements SpaceshipBuilder {
 
+  private int id;
   private String registerNum;
   private int ownerId;
   private List<Propeller> propellers;
@@ -17,7 +18,7 @@ public class CargoBuilder implements SpaceshipBuilder {
   private DefenseSystem defense;
 
   public Cargo getSpaceship() {
-    return new Cargo(registerNum, ownerId, propellers, crewNum, maxLoadTons, defense);
+    return new Cargo(id, registerNum, ownerId, propellers, crewNum, maxLoadTons, defense);
   }
 
   public CargoBuilder setRegisterNum(String registerNum) {
@@ -35,8 +36,10 @@ public class CargoBuilder implements SpaceshipBuilder {
     return this;
   }
 
-  public void setCrewNum(int crewNum) {
+  @Override
+  public CargoBuilder setCrewNum(int crewNum) {
     this.crewNum = crewNum;
+    return this;
   }
 
   public void setMaxLoadTons(double maxLoadTons) {

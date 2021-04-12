@@ -9,14 +9,16 @@ import java.util.List;
 
 public class FighterBuilder implements SpaceshipBuilder {
 
+  private int id;
   private String registerNum;
   private int ownerId;
+  private int crewNum;
   private List<Propeller> propellers;
   private List<Weapon> weapons;
   private DefenseSystem defense;
 
   public Fighter build() {
-    return new Fighter(registerNum, ownerId, propellers, weapons, defense);
+    return new Fighter(id, registerNum, ownerId, propellers, weapons, defense);
   }
 
   @Override
@@ -37,6 +39,12 @@ public class FighterBuilder implements SpaceshipBuilder {
   @Override
   public FighterBuilder setPropellers(List<Propeller> propellers) {
     this.propellers = propellers;
+    return this;
+  }
+
+  @Override
+  public FighterBuilder setCrewNum(int crewNum) {
+    this.crewNum = crewNum;
     return this;
   }
 

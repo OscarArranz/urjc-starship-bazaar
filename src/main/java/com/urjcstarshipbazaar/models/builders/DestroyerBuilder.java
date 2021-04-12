@@ -9,6 +9,7 @@ import java.util.List;
 
 public class DestroyerBuilder implements SpaceshipBuilder {
 
+    private int id;
     private String registerNum;
     private int ownerId;
     private List<Propeller> propellers;
@@ -17,7 +18,7 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     private List<DefenseSystem> defenses;
 
     public Destroyer getSpaceship() {
-        return new Destroyer(registerNum, ownerId, propellers, crewNum, weapons, defenses);
+        return new Destroyer(id, registerNum, ownerId, propellers, crewNum, weapons, defenses);
     }
 
     @Override
@@ -29,6 +30,12 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     @Override
     public DestroyerBuilder setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+        return this;
+    }
+
+    @Override
+    public DestroyerBuilder setCrewNum(int crewNum) {
+        this.crewNum = crewNum;
         return this;
     }
 

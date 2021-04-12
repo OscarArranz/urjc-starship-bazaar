@@ -12,7 +12,8 @@ public abstract class Spaceship {
   private List<Propeller> propellers;
   private int crewNum;
 
-  public Spaceship(String registerNum, int ownerId, List<Propeller> propellers, int crewNum) {
+  public Spaceship(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum) {
+    this.id = id;
     this.registerNum = registerNum;
     this.ownerId = ownerId;
     this.propellers = propellers;
