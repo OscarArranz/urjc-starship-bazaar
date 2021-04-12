@@ -24,6 +24,7 @@ public class UserDAO implements UserDAOInterface {
                     + SEPARATOR + STRINGMARKUP + ((Client) user).getOriginPlanet() + STRINGMARKUP + SEPARATOR +
                     STRINGMARKUP + ((Client) user).getSpecies() + STRINGMARKUP + SEPARATOR + "null)");
 
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             checkExisting(e, "User already exists!");
@@ -50,6 +51,7 @@ public class UserDAO implements UserDAOInterface {
                 client.setSpecies(results.getString("species"));
             }
 
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new DAOException("User not found!", e);
@@ -86,6 +88,7 @@ public class UserDAO implements UserDAOInterface {
                 client.setSpecies(results.getString("species"));
             }
 
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new DAOException("User not found!", e);
@@ -106,6 +109,9 @@ public class UserDAO implements UserDAOInterface {
             while(results.next()) {
                 license = results.getString("spacial_license");
             }
+
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new DAOException("License not found", e);
         }
@@ -122,6 +128,9 @@ public class UserDAO implements UserDAOInterface {
 
             statement
                     .executeUpdate("DELETE FROM Users WHERE id = '" + id + "'");
+
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new DAOException("Couldn't delete user!", e);
         }
@@ -134,6 +143,9 @@ public class UserDAO implements UserDAOInterface {
 
             statement
                     .executeUpdate("UPDATE users SET spacial_license = '" + license + "' WHERE id = " + userId);
+
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             checkExisting(e, "License already exists!");
         }
