@@ -40,6 +40,12 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     }
 
     @Override
+    public SpaceshipBuilder setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
     public DestroyerBuilder setPropellers(List<Propeller> propellers) {
         this.propellers = propellers;
         return this;

@@ -11,7 +11,7 @@ public class Offer {
     private List<Spaceship> spaceships;
     private User vendor;
     private int price;
-    private Date deadline;
+    private String deadline;
 
     public Offer() {    }
 
@@ -31,7 +31,7 @@ public class Offer {
         return price;
     }
 
-    public Date getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
@@ -51,7 +51,7 @@ public class Offer {
         this.price = price;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
 

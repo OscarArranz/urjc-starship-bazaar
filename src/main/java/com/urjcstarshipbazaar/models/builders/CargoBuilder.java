@@ -42,6 +42,12 @@ public class CargoBuilder implements SpaceshipBuilder {
     return this;
   }
 
+  @Override
+  public SpaceshipBuilder setId(int id) {
+    this.id = id;
+    return this;
+  }
+
   public void setMaxLoadTons(double maxLoadTons) {
     this.maxLoadTons = maxLoadTons;
   }
