@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.WelcomeController">
+  <children>
+  <Label alignment="CENTER" contentDisplay="CENTER" style="&#10;" text="Bienvenido al concesionario de naves de la URJC" textAlignment="CENTER" wrapText="false">
+    <font>
+      <Font size="24.0" />
+    </font>
+         <VBox.margin>
+            <Insets bottom="50.0" />
+         </VBox.margin>
+  </Label>
+      <HBox alignment="CENTER">
+         <children>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Iniciar sesión">
+               <HBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#register" text="Registrarse">
+               <HBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+  </children>
+</VBox>
