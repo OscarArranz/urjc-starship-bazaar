@@ -14,4 +14,6 @@ public interface SpaceshipBuilder {
 
     SpaceshipBuilder setCrewNum(int crewNum);
 
+    SpaceshipBuilder setId(int id);
+
 }

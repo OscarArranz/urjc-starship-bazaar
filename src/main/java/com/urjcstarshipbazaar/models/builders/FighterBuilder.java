@@ -1,5 +1,6 @@
 package com.urjcstarshipbazaar.models.builders;
 
+import com.urjcstarshipbazaar.models.spaceships.Destroyer;
 import com.urjcstarshipbazaar.models.spaceships.Fighter;
 import com.urjcstarshipbazaar.models.spaceships.components.DefenseSystem;
 import com.urjcstarshipbazaar.models.spaceships.components.Propeller;
@@ -16,6 +17,10 @@ public class FighterBuilder implements SpaceshipBuilder {
   private List<Propeller> propellers;
   private List<Weapon> weapons;
   private DefenseSystem defense;
+
+  public Fighter getSpaceship() {
+    return new Fighter(id, registerNum, ownerId, propellers, weapons, defense);
+  }
 
   public Fighter build() {
     return new Fighter(id, registerNum, ownerId, propellers, weapons, defense);
@@ -45,6 +50,12 @@ public class FighterBuilder implements SpaceshipBuilder {
   @Override
   public FighterBuilder setCrewNum(int crewNum) {
     this.crewNum = crewNum;
+    return this;
+  }
+
+  @Override
+  public SpaceshipBuilder setId(int id) {
+    this.id = id;
     return this;
   }
 

@@ -46,6 +46,12 @@ public class SpacialStationBuilder implements SpaceshipBuilder {
         return this;
     }
 
+    @Override
+    public SpaceshipBuilder setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public SpacialStationBuilder setMaxPassengers(int maxPassengers) {
         this.maxPassengers = maxPassengers;
         return this;
