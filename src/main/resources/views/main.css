@@ -1,0 +1,12 @@
+.back-arrow {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.input {
+    -fx-background-radius: 6;
+    -fx-background-color: #3C3C3C;
+    -fx-padding: 10 15;
+    -fx-text-fill: #FFF;
+    -fx-font-size: 14;
+}

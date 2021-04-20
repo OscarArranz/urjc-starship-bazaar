@@ -1,0 +1,11 @@
+.register-button {
+    -fx-padding: 15 20;
+    -fx-background-radius: 0;
+    -fx-background-color: #ffc93c;
+    -fx-text-fill: #000;
+}
+
+.register-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #FFD63C;
+}

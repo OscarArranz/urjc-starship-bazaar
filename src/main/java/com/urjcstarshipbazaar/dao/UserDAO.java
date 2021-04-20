@@ -136,6 +136,29 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
+    @Override
+    public String getPasswordByEmail(String email) throws DAOException {
+        String password = "";
+
+        try {
+            Connection connection = DriverManager.getConnection(CONNECTION_URL);
+            Statement statement = connection.createStatement();
+
+            ResultSet results = statement
+                    .executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
+
+            while(results.next()) {
+                password = results.getString("password");
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new DAOException("User not found!", e);
+        }
+        return password;
+    }
+
     public void saveLicense(String license, int userId) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);

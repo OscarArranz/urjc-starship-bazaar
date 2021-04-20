@@ -1,36 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.WelcomeController">
-  <children>
-  <Label alignment="CENTER" contentDisplay="CENTER" style="&#10;" text="Bienvenido al concesionario de naves de la URJC" textAlignment="CENTER" wrapText="false">
-    <font>
-      <Font size="24.0" />
-    </font>
-         <VBox.margin>
-            <Insets bottom="50.0" />
-         </VBox.margin>
-  </Label>
-      <HBox alignment="CENTER">
-         <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Iniciar sesión">
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#register" text="Registrarse">
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-  </children>
-</VBox>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.WelcomeController">
+   <children>
+      <VBox prefHeight="688.0" prefWidth="1280.0" style="-fx-background-color: #1E1E1E;">
+        <children>
+            <HBox prefHeight="688.0" prefWidth="1280.0">
+               <children>
+                  <VBox prefHeight="688.0" prefWidth="700.0">
+                     <children>
+                        <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="150.0" prefWidth="492.0" VBox.vgrow="NEVER">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="45.0" scaleX="0.5" scaleY="0.5" scaleZ="0.0">
+                                 <image>
+                                    <Image url="@../images/icon.png" />
+                                 </image>
+                              </ImageView>
+                          <Label alignment="CENTER" contentDisplay="CENTER" style="&#10;" text="URJC Starship Bazaar" textAlignment="CENTER" textFill="WHITE" wrapText="false">
+                            <font>
+                              <Font name="Gadugi" size="36.0" />
+                            </font>
+                                 <padding>
+                                    <Insets left="-25.0" />
+                                 </padding>
+                          </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="-65.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label text="Iniciar Sesión" textFill="#e8e8e8">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="40.0" top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="loginError" text="El Email o la contraseña son incorrectos." textFill="#ff3c3c">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Email" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Gadugi" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="emailInput" maxWidth="-Infinity" prefHeight="25.0" prefWidth="420.0" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="32.0" top="6.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Contraseña" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="12.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="passwordInput" maxWidth="-Infinity" prefHeight="25.0" prefWidth="420.0" styleClass="input">
+                           <VBox.margin>
+                              <Insets top="6.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="420.0">
+                           <children>
+                              <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefWidth="209.0" text="Iniciar sesión" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets right="1.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="button" />
+                                    <String fx:value="login-button" />
+                                 </styleClass>
+                                 <font>
+                                    <Font name="Gadugi" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#register" prefWidth="209.0" text="Registrarse" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="1.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="button" />
+                                    <String fx:value="register-button" />
+                                 </styleClass>
+                                 <font>
+                                    <Font name="Gadugi" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="70.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="470.0" fitWidth="465.0" pickOnBounds="true" preserveRatio="true" rotate="53.6">
+                     <image>
+                        <Image url="@../images/icon.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="-0.69" saturation="-1.0" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets right="110.0" top="100.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+        </children>
+         <padding>
+            <Insets left="100.0" top="20.0" />
+         </padding>
+         <stylesheets>
+            <URL value="@welcome.css" />
+            <URL value="@main.css" />
+         </stylesheets>
+      </VBox>
+   </children>
+</AnchorPane>
