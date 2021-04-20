@@ -1,0 +1,23 @@
+.button {
+    -fx-padding: 15 20;
+    -fx-background-radius: 0;
+    -fx-background-color: #0E639C;
+}
+
+.button:hover {
+    -fx-background-color: #1177BB;
+    -fx-cursor: hand;
+}
+
+.login-button {
+    -fx-text-fill: #FFF;
+}
+
+.register-button {
+    -fx-background-color: #ffc93c;
+    -fx-text-fill: #000;
+}
+
+.register-button:hover {
+    -fx-background-color: #FFD63C;
+}

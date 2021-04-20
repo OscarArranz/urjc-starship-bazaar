@@ -3,6 +3,8 @@ package com.urjcstarshipbazaar.controllers;
 import com.urjcstarshipbazaar.models.Client;
 import com.urjcstarshipbazaar.models.User;
 import com.urjcstarshipbazaar.services.UserService;
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,29 +26,49 @@ import java.util.ResourceBundle;
 public class RegisterController implements Initializable {
 
     @FXML
-    TextField name;
+    private TextField name;
 
     @FXML
-    TextField nickname;
+    private TextField nickname;
 
     @FXML
-    TextField email;
+    private TextField email;
 
     @FXML
-    TextField password;
+    private TextField password;
 
     @FXML
-    TextField repeatedPassword;
+    private TextField repeatedPassword;
 
     @FXML
-    TextField originPlanet;
+    private TextField originPlanet;
 
     @FXML
-    TextField species;
+    private TextField species;
+
+    @FXML
+    private Button backButton;
+
+    private NavigationController mainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        RotateTransition rotationForward = new RotateTransition(Duration.seconds(0.4), backButton);
+        rotationForward.setCycleCount(1);
+        rotationForward.setByAngle(-360);
 
+        RotateTransition rotationBackwards = new RotateTransition(Duration.seconds(0.4), backButton);
+        rotationBackwards.setCycleCount(1);
+        rotationBackwards.setByAngle(360);
+
+        backButton.setOnMouseEntered(event -> {
+            if(!rotationBackwards.getStatus().equals(Animation.Status.RUNNING))
+                rotationForward.play();
+        });
+        backButton.setOnMouseExited(event -> {
+            if(!rotationForward.getStatus().equals(Animation.Status.RUNNING))
+                rotationBackwards.play();
+        });
     }
 
     @FXML
@@ -60,7 +84,7 @@ public class RegisterController implements Initializable {
                 alert.setContentText("Error al crear el usuario, por favor inténtelo de nuevo más tarde.");
                 alert.show();
             } else {
-                // Go to application
+                mainController.loadWelcome();
             }
     }
 
@@ -128,16 +152,11 @@ public class RegisterController implements Initializable {
 
     @FXML
     public void cancel(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/welcome.fxml"));
-            Parent welcome = loader.load();
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
+        mainController.loadWelcome();
+    }
 
-            stage.setScene(new Scene(welcome));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setMainController(NavigationController controller) {
+        mainController = controller;
     }
 
 }
