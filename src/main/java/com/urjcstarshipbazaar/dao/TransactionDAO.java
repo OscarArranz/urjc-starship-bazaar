@@ -89,6 +89,7 @@ public class TransactionDAO implements TransactionDAOInterface {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
 
+            statement.execute("PRAGMA foreign_keys = ON");
             statement.executeUpdate("DELETE FROM transactions WHERE id = " + id);
 
             statement.close();

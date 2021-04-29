@@ -7,14 +7,33 @@ import java.util.List;
 
 public class Cargo extends Spaceship {
 
-  private double maxLoadTons;
-  private DefenseSystem defense;
+    private double maxLoadTons;
+    private DefenseSystem defense;
 
-  public Cargo(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
-               double maxLoadTons, DefenseSystem defense) {
-    super(id, registerNum, ownerId, propellers, crewNum);
-    this.maxLoadTons = maxLoadTons;
-    this.defense = defense;
-  }
+    public Cargo(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
+                 double maxLoadTons, DefenseSystem defense) {
+        super(id, registerNum, ownerId, propellers, crewNum);
+        this.maxLoadTons = maxLoadTons;
+        this.defense = defense;
+    }
+
+    public Cargo(String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
+                 double maxLoadTons, DefenseSystem defense) {
+        super(registerNum, ownerId, propellers, crewNum);
+        this.maxLoadTons = maxLoadTons;
+        this.defense = defense;
+    }
+
+    public Cargo() {
+
+    }
+
+    public double getMaxLoadTons() {
+        return maxLoadTons;
+    }
+
+    public DefenseSystem getDefense() {
+        return defense;
+    }
 
 }

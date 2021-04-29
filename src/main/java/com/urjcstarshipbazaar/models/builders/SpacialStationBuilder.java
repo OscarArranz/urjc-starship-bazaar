@@ -47,7 +47,7 @@ public class SpacialStationBuilder implements SpaceshipBuilder {
     }
 
     @Override
-    public SpaceshipBuilder setId(int id) {
+    public SpacialStationBuilder setId(int id) {
         this.id = id;
         return this;
     }

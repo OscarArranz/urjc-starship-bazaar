@@ -8,18 +8,38 @@ import java.util.List;
 
 public class Fighter extends Spaceship {
 
-  private List<Weapon> weapons;
-  private DefenseSystem defense;
+    private List<Weapon> weapons;
+    private DefenseSystem defense;
 
-  public Fighter(int id, String registerNum, int ownerId, List<Propeller> propellers,
-                 List<Weapon> weapons, DefenseSystem defense) {
-    super(id, registerNum, ownerId, propellers, 1);
-    this.weapons = weapons;
-    this.defense = defense;
-  }
+    public Fighter(int id, String registerNum, int ownerId, List<Propeller> propellers,
+                   List<Weapon> weapons, DefenseSystem defense) {
+        super(id, registerNum, ownerId, propellers, 1);
+        this.weapons = weapons;
+        this.defense = defense;
+    }
 
-  @Override
-  public String toString() {
-    return getRegisterNum() + " - Fighter";
-  }
+    public Fighter(String registerNum, int ownerId, List<Propeller> propellers,
+                   List<Weapon> weapons, DefenseSystem defense) {
+        super(registerNum, ownerId, propellers, 1);
+        this.weapons = weapons;
+        this.defense = defense;
+    }
+
+    public Fighter() {
+
+    }
+
+    @Override
+    public String toString() {
+        return getRegisterNum() + " - Fighter";
+    }
+
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public DefenseSystem getDefense() {
+        return defense;
+    }
+
 }

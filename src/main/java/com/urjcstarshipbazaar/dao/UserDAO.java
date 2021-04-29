@@ -126,8 +126,8 @@ public class UserDAO implements UserDAOInterface {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
 
-            statement
-                    .executeUpdate("DELETE FROM Users WHERE id = '" + id + "'");
+            statement.execute("PRAGMA foreign_keys = ON");
+            statement.executeUpdate("DELETE FROM Users WHERE id = '" + id + "'");
 
             statement.close();
             connection.close();
