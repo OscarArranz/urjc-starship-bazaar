@@ -40,7 +40,7 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     }
 
     @Override
-    public SpaceshipBuilder setId(int id) {
+    public DestroyerBuilder setId(int id) {
         this.id = id;
         return this;
     }

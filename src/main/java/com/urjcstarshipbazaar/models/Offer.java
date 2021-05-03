@@ -4,6 +4,7 @@ import com.urjcstarshipbazaar.models.spaceships.Spaceship;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Offer {
 
@@ -11,9 +12,26 @@ public class Offer {
     private List<Spaceship> spaceships;
     private User vendor;
     private int price;
-    private String deadline;
+    private Date deadline;
 
-    public Offer() {    }
+    public Offer() {
+
+    }
+
+    public Offer(int id, List<Spaceship> spaceships, User vendor, int price, Date deadline) {
+        this.id = id;
+        this.spaceships = spaceships;
+        this.vendor = vendor;
+        this.price = price;
+        this.deadline = deadline;
+    }
+
+    public Offer(List<Spaceship> spaceships, User vendor, int price, Date deadline) {
+        this.spaceships = spaceships;
+        this.vendor = vendor;
+        this.price = price;
+        this.deadline = deadline;
+    }
 
     public int getId() {
         return id;
@@ -31,7 +49,7 @@ public class Offer {
         return price;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
@@ -51,8 +69,20 @@ public class Offer {
         this.price = price;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Offer offer = (Offer) o;
+        return id == offer.id && price == offer.price;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, price);
+    }
 }
