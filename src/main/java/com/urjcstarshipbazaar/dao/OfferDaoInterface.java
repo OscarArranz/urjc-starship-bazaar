@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface OfferDaoInterface {
 
-    public List<Offer> getBySpaceshipType(Offer offer, SpaceshipType spaceshipType) throws DAOException;
-    public void deleteById(Offer offer);
-    public void save(Offer offer);
-    public Offer getByOfferId(int id) throws DAOException;
+    List<Offer> getBySpaceshipType(SpaceshipType spaceshipType, int page) throws DAOException;
+    void deleteById(int id) throws DAOException;
+    void save(Offer offer) throws DAOException;
+    Offer getByOfferId(int id) throws DAOException;
 }

@@ -1,5 +1,7 @@
 package com.urjcstarshipbazaar.models;
 
+import java.util.Objects;
+
 public class User {
 
     private int id;
@@ -54,4 +56,16 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return nickname.equals(user.nickname) && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nickname, email);
+    }
 }

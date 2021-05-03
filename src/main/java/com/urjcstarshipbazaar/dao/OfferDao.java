@@ -5,9 +5,9 @@ import com.urjcstarshipbazaar.models.Offer;
 import com.urjcstarshipbazaar.models.User;
 import com.urjcstarshipbazaar.models.spaceships.Spaceship;
 import com.urjcstarshipbazaar.models.spaceships.SpaceshipType;
-import sun.jvm.hotspot.gc.shared.Space;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,16 +18,18 @@ public class OfferDao implements OfferDaoInterface {
     private final char STRINGMARKUP = '\'';
 
     @Override
-    public List<Offer> getBySpaceshipType(Offer offer, SpaceshipType spaceshipType) throws DAOException {
+    public List<Offer> getBySpaceshipType(SpaceshipType spaceshipType, int page) throws DAOException {
         List<Offer> offers = new ArrayList<>();
+        int offset = (page - 1) * 20;
+        String offsetText = offset > 0 ? " OFFSET " +
+                offset : "";
+        String query = "SELECT offer_id FROM offer_spaceship WHERE spaceship_register_num IN " +
+                "(SELECT register_num FROM spaceships WHERE spaceship_type = '"
+                + spaceshipType.toString().toLowerCase() + "' LIMIT " + 20 + offsetText + ")";
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(
-                    "SELECT offer_id FROM offer_spaceship WHERE spaceship_register_num = IN " +
-                    "(SELECT register_num FROM spaceships WHERE spaceship_type = '"
-                            + spaceshipType.toString().toLowerCase() + "')"
-            );
+            ResultSet results = statement.executeQuery(query);
 
             while(results.next()) {
                 offers.add(getByOfferId(results.getInt("offer_id")));
@@ -38,43 +40,43 @@ public class OfferDao implements OfferDaoInterface {
         } catch (SQLException ex) {
             throw new DAOException("Couldn't get offers by spaceship type", ex);
         }
-        return null;
+        return offers;
     }
 
     @Override
-    public void deleteById(Offer offer) {
+    public void deleteById(int id) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
 
             statement.execute("PRAGMA foreign_keys = ON");
-            statement.executeUpdate("DELETE FROM offers WHERE id = " + offer.getId()
-                    + " ); ");
+            statement.executeUpdate("DELETE FROM offers WHERE id = " + id);
 
             connection.close();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new DAOException("Couldn't delete offer", exception);
         }
     }
 
     @Override
-    public void save(Offer offer) {
+    public void save(Offer offer) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             Statement statement = connection.createStatement();
-            User aux = offer.getVendor();
             statement.executeUpdate("INSERT INTO offers VALUES(" + STRINGMARKUP + offer.getId() +
-                    STRINGMARKUP + SEPARATOR + STRINGMARKUP + aux.getId() +
+                    STRINGMARKUP + SEPARATOR + STRINGMARKUP + offer.getVendor().getId() +
                     STRINGMARKUP + SEPARATOR + STRINGMARKUP + offer.getPrice() +
-                    STRINGMARKUP + SEPARATOR + STRINGMARKUP + offer.getDeadline().toString() + STRINGMARKUP +
+                    STRINGMARKUP + SEPARATOR + STRINGMARKUP +
+                    new SimpleDateFormat("YYYY-MM-DD HH:MM:SS.SSS").format(offer.getDeadline()) + STRINGMARKUP +
                     " ); " );
-            //Segunda query para la otra tabla
-            statement.executeUpdate("INSERT INTO offer_spaceship VALUES(" + STRINGMARKUP + offer.getId() +
-                    STRINGMARKUP + SEPARATOR +  aux.getId() +
-                    " ); " );
+            for(Spaceship spaceship : offer.getSpaceships()) {
+                statement.executeUpdate("INSERT INTO offer_spaceship VALUES(" + STRINGMARKUP + offer.getId() +
+                        STRINGMARKUP + SEPARATOR + STRINGMARKUP + spaceship.getRegisterNum() + STRINGMARKUP +
+                        ")");
+            }
             connection.close();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new DAOException("Couldn't save offer", exception);
         }
     }
 
@@ -95,7 +97,8 @@ public class OfferDao implements OfferDaoInterface {
                 offer.setId(results.getInt("id"));
                 offer.setVendor(vendor);
                 offer.setPrice(results.getInt("price_cents"));
-                offer.setDeadline(results.getDate("deadline"));
+                offer.setDeadline(new SimpleDateFormat("YYYY-MM-DD")
+                        .parse(results.getString("deadline")));
                 offer.setSpaceships(getSpaceshipsByOfferId(offer.getId()));
             }
 

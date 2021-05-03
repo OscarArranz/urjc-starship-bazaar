@@ -11,6 +11,7 @@ public class TransactionDAO implements TransactionDAOInterface {
 
     private final String CONNECTION_URL = "jdbc:sqlite:database.db";
     private final char SEPARATOR = ',';
+    private final char STRINGMARKUP = '\'';
 
     @Override
     public List<Transaction> getByVendorId(int id) throws DAOException {
@@ -22,7 +23,7 @@ public class TransactionDAO implements TransactionDAOInterface {
         return getByUserIdWithRole(id, "buyer");
     }
 
-    public List<Transaction> getByUserIdWithRole(int id, String userRole) throws DAOException {
+    private List<Transaction> getByUserIdWithRole(int id, String userRole) throws DAOException {
         List<Transaction> transactions = new ArrayList<>();
         UserDAO userDAO = new UserDAO();
 
@@ -31,7 +32,7 @@ public class TransactionDAO implements TransactionDAOInterface {
             Statement statement = connection.createStatement();
 
             ResultSet results = statement
-                    .executeQuery("SELECT * FROM reviews WHERE " + userRole.concat("_id") + " = '" + id + "'");
+                    .executeQuery("SELECT * FROM transactions WHERE " + userRole.concat("_id") + " = " + id);
 
             while(results.next()) {
                 Transaction transaction = new Transaction();
@@ -40,7 +41,7 @@ public class TransactionDAO implements TransactionDAOInterface {
                 transaction.setVendor(userDAO.getById(results.getInt("vendor_id")));
                 transaction.setBuyer(userDAO.getById(results.getInt("buyer_id")));
                 transaction.setPriceCents(results.getInt("price_cents"));
-                // SpaceshipDAO needed to set transaction spaceships
+                transaction.setSpaceships(getSpaceshipsByTransactionId(statement, transaction.getId()));
 
                 transactions.add(transaction);
             }
@@ -54,29 +55,51 @@ public class TransactionDAO implements TransactionDAOInterface {
         return transactions;
     }
 
+    private List<Spaceship> getSpaceshipsByTransactionId(Statement statement, int transactionId) throws DAOException {
+        List<Spaceship> spaceships = new ArrayList<>();
+        SpaceshipDao spaceshipDao = new SpaceshipDao();
+
+        try {
+            ResultSet results = statement.executeQuery(
+                    "SELECT spaceship_register_num from transaction_spaceship where transaction_id = "
+                    + transactionId
+            );
+
+            while (results.next()) {
+                spaceships.add(
+                        spaceshipDao.getSpaceshipByRegisterNum(results.getString("spaceship_register_num"))
+                );
+            }
+        } catch (SQLException throwable) {
+            throw new DAOException("Couldn't get spaceships from transaction", throwable);
+        }
+
+        return spaceships;
+    }
+
     @Override
     public void save(Transaction transaction) throws DAOException {
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
             String sql = "INSERT INTO transactions VALUES(null, " + transaction.getVendor().getId()
                     + SEPARATOR + transaction.getBuyer().getId() + SEPARATOR + transaction.getPriceCents() + ")";
-            PreparedStatement transactionStatement = connection.prepareStatement(sql,
-                    Statement.RETURN_GENERATED_KEYS);
-            Statement spaceshipStatement = connection.createStatement();
+            Statement statement = connection.createStatement();
 
-            transactionStatement.executeUpdate();
+            statement.executeUpdate(sql);
+
+            ResultSet resultSet = statement.executeQuery("select last_insert_rowid()");
 
             for (Spaceship spaceship : transaction.getSpaceships()) {
                 try {
-                    spaceshipStatement.executeUpdate("INSERT INTO transaction_spaceship VALUES("
-                            + transactionStatement.getGeneratedKeys() + SEPARATOR + spaceship.getId() + ")");
+                    statement.executeUpdate("INSERT INTO transaction_spaceship VALUES("
+                            + resultSet.getInt("last_insert_rowid()") + SEPARATOR + STRINGMARKUP +
+                            spaceship.getRegisterNum() + STRINGMARKUP + ")");
                 } catch (SQLException e) {
                     throw new DAOException(e.getMessage(), e);
                 }
             }
 
-            transactionStatement.close();
-            spaceshipStatement.close();
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new DAOException(e.getMessage(), e);

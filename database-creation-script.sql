@@ -65,7 +65,8 @@ create table transactions(
     buyer_id integer not null,
     price_cents integer not null,
 
-    foreign key(vendor_id, buyer_id) references users(id, id) on delete no action on update cascade
+    foreign key(vendor_id) references users(id) on delete no action on update cascade,
+    foreign key(buyer_id) references users(id) on delete no action on update cascade
 );
 
 create table transaction_spaceship(
@@ -108,5 +109,6 @@ create table reviews(
     vendor_id integer not null,
     buyer_id integer not null,
 
-    foreign key(vendor_id, buyer_id) references users(id, id) on delete cascade on update cascade
+    foreign key(vendor_id) references users(id) on delete cascade on update cascade,
+    foreign key(buyer_id) references users(id) on delete cascade on update cascade
 );
