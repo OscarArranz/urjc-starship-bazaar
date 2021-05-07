@@ -37,7 +37,10 @@ public class WelcomeController extends Controller {
     @FXML
     public void login(ActionEvent event) {
         UserService userService = new UserService();
-        if (userService.login(emailInput.getText(), passwordInput.getText())) {
+        if (
+                !emailInput.getText().isEmpty() && !passwordInput.getText().isEmpty()
+                && userService.login(emailInput.getText(), passwordInput.getText())
+        ) {
             loginError.setVisible(false);
             loginError.setManaged(false);
             getMainController().loadProfile();
