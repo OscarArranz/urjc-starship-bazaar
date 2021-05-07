@@ -3,7 +3,6 @@ package com.urjcstarshipbazaar.dao;
 import com.urjcstarshipbazaar.dao.exceptions.DAOException;
 import com.urjcstarshipbazaar.models.Client;
 import com.urjcstarshipbazaar.models.Transaction;
-import com.urjcstarshipbazaar.models.User;
 import com.urjcstarshipbazaar.models.builders.CargoBuilder;
 import com.urjcstarshipbazaar.models.spaceships.Cargo;
 import com.urjcstarshipbazaar.models.spaceships.Spaceship;
@@ -23,7 +22,7 @@ public class TransactionDAOTest {
     @Test
     public void saveGetAndDelete() {
         TransactionDAO transactionDAO = new TransactionDAO();
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         UserDAO userDAO = new UserDAO();
 
         List<Spaceship> spaceships = new ArrayList<>();

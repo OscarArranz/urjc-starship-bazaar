@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable {
+public class RegisterController extends Controller {
 
     @FXML
     private TextField name;
@@ -48,8 +48,6 @@ public class RegisterController implements Initializable {
 
     @FXML
     private Button backButton;
-
-    private NavigationController mainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,7 +82,7 @@ public class RegisterController implements Initializable {
                 alert.setContentText("Error al crear el usuario, por favor inténtelo de nuevo más tarde.");
                 alert.show();
             } else {
-                mainController.loadWelcome();
+                getMainController().loadWelcome();
             }
     }
 
@@ -152,11 +150,7 @@ public class RegisterController implements Initializable {
 
     @FXML
     public void cancel(ActionEvent event) {
-        mainController.loadWelcome();
-    }
-
-    public void setMainController(NavigationController controller) {
-        mainController = controller;
+        getMainController().loadWelcome();
     }
 
 }

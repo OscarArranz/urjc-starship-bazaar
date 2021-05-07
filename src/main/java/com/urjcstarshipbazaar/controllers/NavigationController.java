@@ -69,7 +69,7 @@ public class NavigationController implements Initializable {
         Map<String, String> sideBarOptions = new LinkedHashMap<>();
         sideBarOptions.put("Perfil", "profile.fxml");
         sideBarOptions.put("Comprar", "buy.fxml");
-        sideBarOptions.put("Vender", "sell.fxml");
+        sideBarOptions.put("Vender", "publishOffer.fxml");
         sideBarOptions.put("Valoraciones", "reviews.fxml");
 
         List<Button> optionButtons = new ArrayList<>();
@@ -78,7 +78,8 @@ public class NavigationController implements Initializable {
             button.setOnAction(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + resource));
-                    VBox view = loader.load();
+                    Pane view = loader.load();
+                    ((Controller) loader.getController()).setMainController(this);
                     appContent.getChildren().setAll(view);
                 } catch (IOException e) {
                     e.printStackTrace();

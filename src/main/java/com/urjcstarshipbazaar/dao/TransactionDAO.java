@@ -57,7 +57,7 @@ public class TransactionDAO implements TransactionDAOInterface {
 
     private List<Spaceship> getSpaceshipsByTransactionId(Statement statement, int transactionId) throws DAOException {
         List<Spaceship> spaceships = new ArrayList<>();
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
 
         try {
             ResultSet results = statement.executeQuery(

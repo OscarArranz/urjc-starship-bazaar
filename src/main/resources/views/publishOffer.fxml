@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.PublishOfferController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" style="-fx-background-color: #1E1E1E;">
+         <children>
+            <HBox>
+               <children>
+                  <VBox maxWidth="-Infinity">
+                     <children>
+                        <Label text="Nueva oferta" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Datos basicos" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Precio" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Gadugi" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="price" maxWidth="-Infinity" prefWidth="420.0" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="14.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Fecha de expiración (dd/mm/aa)" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="expirationDate" maxWidth="-Infinity" prefHeight="40.0" prefWidth="420.0" styleClass="input" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </VBox>
+                  <Line endX="-111.44166564941406" endY="425.0233459472656" startX="-112.44232177734375" startY="-23.269559860229492" stroke="#464646">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Line>
+                  <VBox maxWidth="-Infinity">
+                     <children>
+                        <Label text="Selecciona naves para incluir en la oferta" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="74.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ScrollPane prefHeight="296.0" prefWidth="420.0" style="-fx-padding: 0;">
+                           <content>
+                              <VBox fx:id="spaceshipPicker" prefHeight="298.0" prefWidth="405.0" spacing="20.0" style="-fx-background-color: #1E1E1E;">
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding></VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button fx:id="publishOffer" mnemonicParsing="false" text="Publicar Oferta">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="80.0" right="80.0" top="80.0" />
+         </padding>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@main.css" />
+      <URL value="@publishOffer.css" />
+   </stylesheets>
+</AnchorPane>

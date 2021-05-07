@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OfferDao implements OfferDaoInterface {
+public class OfferDAO implements OfferDAOInterface {
 
     private final String CONNECTION_URL = "jdbc:sqlite:database.db";
     private final char SEPARATOR = ',';
@@ -123,7 +123,7 @@ public class OfferDao implements OfferDaoInterface {
             );
 
             while(results.next()) {
-                spaceships.add(new SpaceshipDao()
+                spaceships.add(new SpaceshipDAO()
                         .getSpaceshipByRegisterNum(results.getString("spaceship_register_num")));
             }
 

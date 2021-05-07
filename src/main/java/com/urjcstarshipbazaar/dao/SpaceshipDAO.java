@@ -8,8 +8,9 @@ import com.urjcstarshipbazaar.models.spaceships.components.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class SpaceshipDao implements SpaceshipDaoInterface {
+public class SpaceshipDAO implements SpaceshipDAOInterface {
 
     private final String CONNECTION_URL = "jdbc:sqlite:database.db";
     private final char SEPARATOR = ',';
@@ -69,7 +70,7 @@ public class SpaceshipDao implements SpaceshipDaoInterface {
     }
 
     @Override
-    public List<Spaceship> getSpaceshipsByUserid(int id) throws DAOException {
+    public List<Spaceship> getSpaceshipsByUserId(int id) throws DAOException {
         List<Spaceship> spaceships = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(CONNECTION_URL);
@@ -93,7 +94,7 @@ public class SpaceshipDao implements SpaceshipDaoInterface {
         Spaceship spaceship = new Cargo();
 
         try {
-            String spaceshipType = results.getString("spaceship_type");
+            String spaceshipType = results.getString("spaceship_type").toLowerCase();
             switch (spaceshipType) {
                 case "cargo":
                     spaceship = buildCargoFromResults(results);
