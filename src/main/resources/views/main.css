@@ -5,8 +5,29 @@
 
 .input {
     -fx-background-radius: 6;
-    -fx-background-color: #3C3C3C;
+    -fx-background-color: #3C3C3C, #3C3C3C;
     -fx-padding: 10 15;
     -fx-text-fill: #FFF;
     -fx-font-size: 14;
+    -fx-background-insets: 0, 1;
+}
+
+.input:focused {
+    -fx-background-color: #287AC2, #3C3C3C;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: #287AC2;
+}
+
+.check-box > .box {
+    /* background color of unselected checkbox */
+    -fx-background-color: #FFF;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: #FFF;
+}
+.check-box > .box > .mark {
+    -fx-background-color: #FFF;
 }

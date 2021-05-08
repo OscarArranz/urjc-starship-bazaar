@@ -14,11 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class SpaceshipDaoTest {
+public class SpaceshipDAOTest {
 
     @Test
     public void saveGetAndDeleteCargo() {
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));
         propellers.add(new Propeller(PropellerType.FTL_ENGINE, 500));
@@ -45,7 +45,7 @@ public class SpaceshipDaoTest {
 
     @Test
     public void saveDestroyer() {
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));
         propellers.add(new Propeller(PropellerType.FTL_ENGINE, 500));
@@ -64,12 +64,17 @@ public class SpaceshipDaoTest {
                 .setDefenses(defenses)
                 .getSpaceship();
 
-        Destroyer receivedDestroyer;
+        Destroyer receivedDestroyerByRegisterNum;
+        Destroyer receivedDestroyerByUser;
         try {
             spaceshipDao.saveSpaceship(destroyer);
-            receivedDestroyer = (Destroyer) spaceshipDao.getSpaceshipByRegisterNum(destroyer.getRegisterNum());
-            assertEquals(receivedDestroyer, destroyer);
-            spaceshipDao.deleteSpaceshipByRegisterNum(receivedDestroyer.getRegisterNum());
+            receivedDestroyerByRegisterNum = (Destroyer) spaceshipDao.getSpaceshipByRegisterNum(destroyer.getRegisterNum());
+            receivedDestroyerByUser = (Destroyer) spaceshipDao.getSpaceshipsByUserId(1).get(0);
+
+            assertEquals(receivedDestroyerByRegisterNum, destroyer);
+            assertEquals(receivedDestroyerByUser, destroyer);
+
+            spaceshipDao.deleteSpaceshipByRegisterNum(receivedDestroyerByRegisterNum.getRegisterNum());
         } catch (DAOException e) {
             e.printStackTrace();
         }
@@ -77,7 +82,7 @@ public class SpaceshipDaoTest {
 
     @Test
     public void saveFighter() {
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));
         propellers.add(new Propeller(PropellerType.FTL_ENGINE, 500));
@@ -107,7 +112,7 @@ public class SpaceshipDaoTest {
 
     @Test
     public void saveSpacialStation() {
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));
         propellers.add(new Propeller(PropellerType.FTL_ENGINE, 500));
