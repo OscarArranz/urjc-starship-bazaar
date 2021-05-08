@@ -71,8 +71,6 @@
             <artifactId>ikonli-fontawesome5-pack</artifactId>
             <version>12.2.0</version>
         </dependency>
-
-
     </dependencies>
 
 </project>
