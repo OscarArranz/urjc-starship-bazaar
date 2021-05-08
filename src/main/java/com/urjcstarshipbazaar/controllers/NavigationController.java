@@ -109,7 +109,7 @@ public class NavigationController implements Initializable {
         initializeSideBar();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/profile.fxml"));
-            VBox view = loader.load();
+            Pane view = loader.load();
             appContent.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
