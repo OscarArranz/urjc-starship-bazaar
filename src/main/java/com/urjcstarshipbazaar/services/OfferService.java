@@ -18,7 +18,7 @@ public class OfferService {
     }
 
     public boolean publish(List<Spaceship> spaceships, int price, Date expirationDate) {
-        Offer offer = new Offer(spaceships, LoggedUser.getInstance().getUser(), price, expirationDate);
+        Offer offer = new Offer(spaceships, LoggedUser.getInstance().getUser(), price * 100, expirationDate);
 
         try {
             offerDAO.save(offer);
