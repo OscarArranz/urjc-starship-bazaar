@@ -2,51 +2,105 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" style="-fx-background-color: #1E1E1E;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.ProfileController">
    <children>
-      <Label layoutX="74.0" layoutY="49.0" prefHeight="35.0" prefWidth="68.0" text="Perfil" textFill="WHITE">
+      <Label layoutX="90.0" layoutY="62.0" prefHeight="35.0" prefWidth="68.0" text="Perfil" textFill="WHITE">
          <font>
             <Font name="Gadugi" size="24.0" />
          </font>
       </Label>
-      <VBox layoutX="108.0" layoutY="132.0" prefHeight="425.0" prefWidth="272.0">
+      <VBox alignment="CENTER_LEFT" layoutX="90.0" layoutY="132.0" prefHeight="174.0" prefWidth="468.0">
          <children>
-            <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="176.0" prefWidth="0.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="138.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/usuario.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="nickname" text="Username" textFill="WHITE">
-                     <font>
-                        <Font name="Gadugi" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="name" text="Name" textFill="WHITE">
-                     <font>
-                        <Font name="Gadugi" size="14.0" />
-                     </font></Label>
-                  <Label fx:id="specie" text="Species" textFill="WHITE">
-                     <font>
-                        <Font name="Gadugi" size="14.0" />
-                     </font></Label>
-                  <Label fx:id="originPlanet" text="Origin_planet" textFill="WHITE">
-                     <font>
-                        <Font name="Gadugi" size="14.0" />
-                     </font></Label>
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="176.0" prefWidth="0.0">
+                     <children>
+                        <ImageView fitHeight="138.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/usuario.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="nickname" text="Username" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="175.0" prefWidth="182.0">
+                     <children>
+                        <Label text="Nombre:" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="name" text="Name" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Especie:" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="specie" text="Species" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Planeta de origen" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="originPlanet" text="Origin_planet" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
+      <Label layoutX="551.0" layoutY="62.0" prefHeight="35.0" prefWidth="68.0" text="Naves" textFill="WHITE">
+         <font>
+            <Font name="Gadugi" size="24.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="551.0" layoutY="132.0" prefHeight="489.0" prefWidth="505.0" style="-fx-padding: 0;">
+         <content>
+            <VBox fx:id="spaceshipPicker" prefHeight="489.0" prefWidth="505.0" spacing="20.0" style="-fx-background-color: #1E1E1E;" stylesheets="@publishOffer.css">
+               <padding>
+                  <Insets bottom="40.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReviewsController implements Initializable {
+public class ReviewsController extends Controller {
 
     @FXML
     private TextArea textArea;

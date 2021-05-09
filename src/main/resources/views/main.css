@@ -16,6 +16,10 @@
     -fx-background-color: #287AC2, #3C3C3C;
 }
 
+.input .content {
+    -fx-background-color: #3C3C3C, #3C3C3C;
+}
+
 .check-box:selected > .box {
     -fx-background-color: #287AC2;
 }
