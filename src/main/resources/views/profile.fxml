@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" style="-fx-background-color: #1E1E1E;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.ProfileController">
    <children>
       <Label layoutX="74.0" layoutY="49.0" prefHeight="35.0" prefWidth="68.0" text="Perfil" textFill="WHITE">
@@ -33,9 +32,18 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="name" text="Name" />
-                  <Label fx:id="specie" text="Species" />
-                  <Label fx:id="originPlanet" text="Origin_planet" />
+                  <Label fx:id="name" text="Name" textFill="WHITE">
+                     <font>
+                        <Font name="Gadugi" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="specie" text="Species" textFill="WHITE">
+                     <font>
+                        <Font name="Gadugi" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="originPlanet" text="Origin_planet" textFill="WHITE">
+                     <font>
+                        <Font name="Gadugi" size="14.0" />
+                     </font></Label>
                </children>
             </VBox>
          </children>

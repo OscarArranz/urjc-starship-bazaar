@@ -41,21 +41,44 @@ public class ReviewsController implements Initializable {
     @FXML
     public void addReview(ActionEvent event) {
         try {
-            Review review = new Review();
-            review.setBuyer(LoggedUser.getInstance().getUser());
-            User user = new UserDAO().getByNickname(username.getText());
-            review.setComment(username.getText());
-            review.setVendor(user);
-            review.setScore(Double.parseDouble(score.getText()));
-            review.setComment(textArea.getText());
+            if(validateInput()){
+                Review review = new Review();
+                review.setBuyer(LoggedUser.getInstance().getUser());
+                User user = new UserDAO().getByNickname(username.getText());
+                review.setComment(username.getText());
+                review.setVendor(user);
+                review.setScore(Double.parseDouble(score.getText()));
+                review.setComment(textArea.getText());
 
-            ReviewService service = new ReviewService();
-            service.addReview(review);
+                ReviewService service = new ReviewService();
+                service.addReview(review);
+            }
         }
         catch (DAOException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             return;
         }
+    }
+
+    private boolean validateInput(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error en el formulario");
+        if(textArea.getText().isEmpty()) {
+            alert.setContentText("Debe insertar texto para poder subir la reseña.");
+            alert.show();
+            return false;
+        }
+        if(score.getText().isEmpty()) {
+            alert.setContentText("Debe insertar una puntuación para poder subir la reseña.");
+            alert.show();
+            return false;
+        }
+        if(username.getText().isEmpty()) {
+            alert.setContentText("Debe insertar un name para poder subir la reseña.");
+            alert.show();
+            return false;
+        }
+        return true;
     }
 }
