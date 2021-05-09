@@ -23,11 +23,8 @@ public class FighterBuilder implements SpaceshipBuilder {
     }
 
     @Override
-    public FighterBuilder setRegisterNum(String registerNum) throws RuntimeException {
-        registerNum = registerNum.toUpperCase();
-        if (registerNum.matches("[A-Z]\\d{4}[A-Z]{3}"))
-            this.registerNum = registerNum;
-        else throw new RuntimeException("Not a valid Register Number!");
+    public FighterBuilder setRegisterNum(String registerNum) {
+        this.registerNum = registerNum.toUpperCase();
         return this;
     }
 

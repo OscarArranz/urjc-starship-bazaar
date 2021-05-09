@@ -31,3 +31,27 @@
 .check-box > .box > .mark {
     -fx-background-color: #FFF;
 }
+
+.main-button {
+    -fx-padding: 15 20;
+    -fx-background-radius: 0;
+    -fx-background-color: #ffc93c;
+    -fx-text-fill: #000;
+}
+
+.main-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #FFD63C;
+}
+
+.secondary-button {
+    -fx-padding: 15 20;
+    -fx-background-radius: 0;
+    -fx-background-color: #0E639C;
+    -fx-text-fill: #FFF;
+}
+
+.secondary-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #1177BB;
+}

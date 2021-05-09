@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SpaceshipBuilder {
 
-    SpaceshipBuilder setRegisterNum(String registerNum) throws Exception;
+    SpaceshipBuilder setRegisterNum(String registerNum);
 
     SpaceshipBuilder setOwnerId(int ownerId);
 

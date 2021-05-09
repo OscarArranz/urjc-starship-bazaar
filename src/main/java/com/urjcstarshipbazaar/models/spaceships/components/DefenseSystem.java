@@ -16,4 +16,7 @@ public abstract class DefenseSystem {
         return maxDamageGj;
     }
 
+    public void setMaxDamageGj(double maxDamageGj) {
+        this.maxDamageGj = maxDamageGj;
+    }
 }

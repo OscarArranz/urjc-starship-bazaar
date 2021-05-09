@@ -13,7 +13,11 @@ public class Shield extends DefenseSystem {
 
     }
 
-  public double getRequiredEnergyGj() {
-    return requiredEnergyGj;
-  }
+    public double getRequiredEnergyGj() {
+        return requiredEnergyGj;
+    }
+
+    public void setRequiredEnergyGj(double requiredEnergyGj) {
+        this.requiredEnergyGj = requiredEnergyGj;
+    }
 }

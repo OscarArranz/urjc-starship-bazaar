@@ -14,16 +14,16 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     private int ownerId;
     private List<Propeller> propellers;
     private int crewNum;
-    private List<Weapon> weapons;
+    private Weapon weapon;
     private List<DefenseSystem> defenses;
 
     public Destroyer getSpaceship() {
-        return new Destroyer(id, registerNum, ownerId, propellers, crewNum, weapons, defenses);
+        return new Destroyer(id, registerNum, ownerId, propellers, crewNum, weapon, defenses);
     }
 
     @Override
     public DestroyerBuilder setRegisterNum(String registerNum) {
-        this.registerNum = registerNum;
+        this.registerNum = registerNum.toUpperCase();
         return this;
     }
 
@@ -51,8 +51,8 @@ public class DestroyerBuilder implements SpaceshipBuilder {
         return this;
     }
 
-    public DestroyerBuilder setWeapons(List<Weapon> weapons) {
-        this.weapons = weapons;
+    public DestroyerBuilder setWeapon(Weapon weapon) {
+        this.weapon = weapon;
         return this;
     }
 

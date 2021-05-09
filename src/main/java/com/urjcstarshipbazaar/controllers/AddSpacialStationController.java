@@ -1,42 +1,50 @@
 package com.urjcstarshipbazaar.controllers;
 
+import com.urjcstarshipbazaar.models.builders.CargoBuilder;
+import com.urjcstarshipbazaar.models.builders.SpaceshipBuilder;
+import com.urjcstarshipbazaar.models.builders.SpacialStationBuilder;
 import com.urjcstarshipbazaar.models.spaceships.Spaceship;
-import com.urjcstarshipbazaar.services.OfferService;
+import com.urjcstarshipbazaar.models.spaceships.SpaceshipType;
+import com.urjcstarshipbazaar.models.spaceships.components.Propeller;
+import com.urjcstarshipbazaar.models.spaceships.components.PropellerType;
 import com.urjcstarshipbazaar.services.SpaceshipService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PublishOfferController extends Controller {
+public class AddSpacialStationController extends Controller {
 
     @FXML
-    private TextField price;
-
-    @FXML
-    private TextField expirationDate;
+    private TextField maxPassengers;
 
     @FXML
     private VBox spaceshipPicker;
-    
+
     private List<Spaceship> userSpaceships;
-    
+
     private List<CheckBox> checkBoxes;
+
+    private SpaceshipBuilder builder;
+
+    private List<Spaceship> spaceships;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeSpaceships();
+    }
+
+    public void setBuilder(SpaceshipBuilder builder) {
+        this.builder = builder;
     }
 
     private void initializeSpaceships() {
@@ -78,16 +86,8 @@ public class PublishOfferController extends Controller {
     }
 
     @FXML
-    private void publishOffer(ActionEvent event) {
-        OfferService offerService = new OfferService();
-
-        Date expirationDate = new Date();
-
-        try {
-            expirationDate = new SimpleDateFormat("dd/mm/yyyy").parse(this.expirationDate.getText());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void nextStep(ActionEvent event) {
+        SpaceshipService spaceshipService = new SpaceshipService();
 
         List<Spaceship> selectedSpaceships = new ArrayList<>();
 
@@ -95,7 +95,21 @@ public class PublishOfferController extends Controller {
             selectedSpaceships.add(userSpaceships.get(i));
         }
 
-        offerService.publish(selectedSpaceships, Integer.parseInt(price.getText()), expirationDate);
+        ((SpacialStationBuilder) builder).setMaxPassengers(Integer.parseInt(maxPassengers.getText()));
+        ((SpacialStationBuilder) builder).setSpaceships(selectedSpaceships);
+
+        boolean save = spaceshipService.save(((SpacialStationBuilder) builder).getSpaceship());
+
+        if(!save) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error al guardar nave");
+            alert.setContentText("Ha ocurrido un error al guardar la nave, por favor vuelva a intentarlo.");
+            alert.show();
+
+            return;
+        }
+
+        getMainController().load("addSpaceship");
     }
 
 }
