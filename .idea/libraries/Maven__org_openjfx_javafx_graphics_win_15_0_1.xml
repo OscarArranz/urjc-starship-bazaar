@@ -6,6 +6,9 @@
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1-javadoc.jar!/" />
     </JAVADOC>
+    <NATIVE>
+      <root url="file://$MAVEN_REPOSITORY$/org/openjfx/javafx" />
+    </NATIVE>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1-sources.jar!/" />
     </SOURCES>

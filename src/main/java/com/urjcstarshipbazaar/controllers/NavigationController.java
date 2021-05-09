@@ -71,7 +71,7 @@ public class NavigationController implements Initializable {
         sideBarOptions.put("Añadir nave", "addSpaceship.fxml");
         sideBarOptions.put("Comprar", "buy.fxml");
         sideBarOptions.put("Vender", "publishOffer.fxml");
-        sideBarOptions.put("Valoraciones", "reviews.fxml");
+        sideBarOptions.put("Valoraciones", "review.fxml");
 
         List<Button> optionButtons = new ArrayList<>();
         sideBarOptions.forEach((text, resource) -> {
