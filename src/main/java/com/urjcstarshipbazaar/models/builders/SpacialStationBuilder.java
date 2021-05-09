@@ -24,7 +24,7 @@ public class SpacialStationBuilder implements SpaceshipBuilder {
 
     @Override
     public SpacialStationBuilder setRegisterNum(String registerNum) {
-        this.registerNum = registerNum;
+        this.registerNum = registerNum.toUpperCase();
         return this;
     }
 

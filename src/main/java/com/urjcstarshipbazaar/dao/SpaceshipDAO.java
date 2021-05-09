@@ -145,7 +145,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
         try {
             String registerNum = results.getString("register_num");
             List<Propeller> propellers = getPropellersByRegisterNum(registerNum);
-            List<Weapon> weapons = getWeaponsByRegisterNum(registerNum);
+            Weapon weapon = getWeaponsByRegisterNum(registerNum).get(0);
             List<DefenseSystem> defenses = getDefensesByRegisterNum(registerNum);
 
             destroyer = new DestroyerBuilder()
@@ -154,7 +154,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     .setOwnerId(results.getInt("owner_id"))
                     .setPropellers(propellers)
                     .setCrewNum(results.getInt("crew_num"))
-                    .setWeapons(weapons)
+                    .setWeapon(weapon)
                     .setDefenses(defenses)
                     .getSpaceship();
         } catch (SQLException throwable) {
@@ -389,15 +389,13 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
 
     public void saveDestroyer(Destroyer destroyer, Statement statement) throws DAOException {
         List<DefenseSystem> defenses = destroyer.getDefenses();
-        List<Weapon> weapons = destroyer.getWeapons();
+        Weapon weapon = destroyer.getWeapon();
 
         for (DefenseSystem defense : defenses) {
             saveDefense(defense, destroyer.getRegisterNum(), statement);
         }
 
-        for (Weapon weapon : weapons) {
-            saveWeapon(weapon, destroyer.getRegisterNum(), statement);
-        }
+        saveWeapon(weapon, destroyer.getRegisterNum(), statement);
     }
 
     public void saveFighter(Fighter fighter, Statement statement) throws DAOException {
@@ -420,7 +418,6 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
 
         for(Spaceship spaceship : spaceships) {
             try {
-                saveSpaceship(spaceship);
                 statement.executeUpdate("INSERT INTO station_spaceship VALUES(" + STRINGMARKUP
                         + spacialStation.getRegisterNum() + STRINGMARKUP + SEPARATOR + STRINGMARKUP
                         + spaceship.getRegisterNum() + STRINGMARKUP + ")");

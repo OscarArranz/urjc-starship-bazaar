@@ -31,4 +31,14 @@ public class SpaceshipService {
         return getSpaceshipsByUserId(LoggedUser.getInstance().getUser().getId());
     }
 
+    public boolean save(Spaceship spaceship) {
+        try {
+            spaceshipDAO.saveSpaceship(spaceship);
+            return true;
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

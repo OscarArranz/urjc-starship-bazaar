@@ -22,4 +22,13 @@ public class Armor extends DefenseSystem {
     public double getWeightTons() {
         return weightTons;
     }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public void setWeightTons(double weightTons) {
+        this.weightTons = weightTons;
+    }
+
 }

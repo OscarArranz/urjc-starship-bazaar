@@ -22,7 +22,7 @@ public class CargoBuilder implements SpaceshipBuilder {
     }
 
     public CargoBuilder setRegisterNum(String registerNum) {
-        this.registerNum = registerNum;
+        this.registerNum = registerNum.toUpperCase();
         return this;
     }
 
