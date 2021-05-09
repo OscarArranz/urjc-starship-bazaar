@@ -43,7 +43,7 @@ public class ReviewsController implements Initializable {
         try {
             Review review = new Review();
             review.setBuyer(LoggedUser.getInstance().getUser());
-            User user = new UserDAO().getByStringValueWithField(username.getText(),"name");
+            User user = new UserDAO().getByNickname(username.getText());
             review.setComment(username.getText());
             review.setVendor(user);
             review.setScore(Double.parseDouble(score.getText()));
