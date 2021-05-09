@@ -68,8 +68,9 @@ public class NavigationController implements Initializable {
 
         Map<String, String> sideBarOptions = new LinkedHashMap<>();
         sideBarOptions.put("Perfil", "profile.fxml");
+        sideBarOptions.put("Añadir nave", "addSpaceship.fxml");
         sideBarOptions.put("Comprar", "buy.fxml");
-        sideBarOptions.put("Vender", "sell.fxml");
+        sideBarOptions.put("Vender", "publishOffer.fxml");
         sideBarOptions.put("Valoraciones", "reviews.fxml");
 
         List<Button> optionButtons = new ArrayList<>();
@@ -78,7 +79,8 @@ public class NavigationController implements Initializable {
             button.setOnAction(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + resource));
-                    VBox view = loader.load();
+                    Pane view = loader.load();
+                    ((Controller) loader.getController()).setMainController(this);
                     appContent.getChildren().setAll(view);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -97,46 +99,43 @@ public class NavigationController implements Initializable {
         this.stage = stage;
     }
 
-    public void closeWindow(ActionEvent event) {
+    @FXML
+    private void closeWindow(ActionEvent event) {
         stage.close();
     }
 
-    public void minimizeWindow(ActionEvent event) {
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
         stage.setIconified(true);
     }
 
     public void loadProfile() {
         initializeSideBar();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/profile.fxml"));
-            Pane view = loader.load();
-            appContent.getChildren().setAll(view);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        load("profile");
     }
 
     public void loadWelcome() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/welcome.fxml"));
-            AnchorPane view = loader.load();
-            WelcomeController welcomeController = loader.getController();
-            welcomeController.setMainController(this);
-            appContent.getChildren().setAll(view);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        load("welcome");
     }
 
     public void loadRegister() {
+        load("register");
+    }
+
+    public Controller load(String viewUrl) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/register.fxml"));
-            AnchorPane view = loader.load();
-            RegisterController registerController = loader.getController();
-            registerController.setMainController(this);
+            String resource = "/views/" + viewUrl + ".fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+            Pane view = loader.load();
+            Controller controller = loader.getController();
+            controller.setMainController(this);
             appContent.getChildren().setAll(view);
+
+            return controller;
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 }

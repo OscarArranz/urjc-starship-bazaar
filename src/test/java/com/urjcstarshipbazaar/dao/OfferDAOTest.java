@@ -15,18 +15,16 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class OfferDaoTest {
+public class OfferDAOTest {
 
     @Test
     public void saveGetByIdAndDelete() {
-        OfferDao offerDao = new OfferDao();
+        OfferDAO offerDao = new OfferDAO();
         List<Spaceship> spaceships = new ArrayList<>();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));
@@ -68,8 +66,8 @@ public class OfferDaoTest {
 
     @Test
     public void saveGetBySpaceshipTypeAndDelete() {
-        OfferDao offerDao = new OfferDao();
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        OfferDAO offerDao = new OfferDAO();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
         List<Spaceship> spaceships = new ArrayList<>();
         List<Propeller> propellers = new ArrayList<>();
         propellers.add(new Propeller(PropellerType.CURVATURE_ENGINE, 800));

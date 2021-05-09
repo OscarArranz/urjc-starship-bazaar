@@ -7,7 +7,7 @@ import com.urjcstarshipbazaar.models.spaceships.SpaceshipType;
 
 import java.util.List;
 
-public interface OfferDaoInterface {
+public interface OfferDAOInterface {
 
     List<Offer> getBySpaceshipType(SpaceshipType spaceshipType, int page) throws DAOException;
     void deleteById(int id) throws DAOException;

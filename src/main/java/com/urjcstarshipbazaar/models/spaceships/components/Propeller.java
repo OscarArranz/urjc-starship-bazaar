@@ -10,6 +10,10 @@ public class Propeller {
         this.maxSpeedKmh = maxSpeedKmh;
     }
 
+    public Propeller() {
+
+    }
+
     public PropellerType getPropellerType() {
         return propellerType;
     }
@@ -17,4 +21,13 @@ public class Propeller {
     public double getMaxSpeedKmh() {
         return maxSpeedKmh;
     }
+
+    public void setPropellerType(PropellerType propellerType) {
+        this.propellerType = propellerType;
+    }
+
+    public void setMaxSpeedKmh(double maxSpeedKmh) {
+        this.maxSpeedKmh = maxSpeedKmh;
+    }
+
 }

@@ -57,7 +57,7 @@ public class TransactionDAO implements TransactionDAOInterface {
 
     private List<Spaceship> getSpaceshipsByTransactionId(Statement statement, int transactionId) throws DAOException {
         List<Spaceship> spaceships = new ArrayList<>();
-        SpaceshipDao spaceshipDao = new SpaceshipDao();
+        SpaceshipDAO spaceshipDao = new SpaceshipDAO();
 
         try {
             ResultSet results = statement.executeQuery(
@@ -89,13 +89,15 @@ public class TransactionDAO implements TransactionDAOInterface {
 
             ResultSet resultSet = statement.executeQuery("select last_insert_rowid()");
 
-            for (Spaceship spaceship : transaction.getSpaceships()) {
-                try {
-                    statement.executeUpdate("INSERT INTO transaction_spaceship VALUES("
-                            + resultSet.getInt("last_insert_rowid()") + SEPARATOR + STRINGMARKUP +
-                            spaceship.getRegisterNum() + STRINGMARKUP + ")");
-                } catch (SQLException e) {
-                    throw new DAOException(e.getMessage(), e);
+            while(resultSet.next()) {
+                for (Spaceship spaceship : transaction.getSpaceships()) {
+                    try {
+                        statement.executeUpdate("INSERT INTO transaction_spaceship VALUES("
+                                + resultSet.getInt("last_insert_rowid()") + SEPARATOR + STRINGMARKUP +
+                                spaceship.getRegisterNum() + STRINGMARKUP + ")");
+                    } catch (SQLException e) {
+                        throw new DAOException(e.getMessage(), e);
+                    }
                 }
             }
 
