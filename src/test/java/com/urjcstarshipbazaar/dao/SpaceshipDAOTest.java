@@ -52,15 +52,12 @@ public class SpaceshipDAOTest {
         List<DefenseSystem> defenses = new ArrayList<>();
         defenses.add(new Armor(30, "Graphite", 10));
         defenses.add(new Shield(50, 70));
-        List<Weapon> weapons = new ArrayList<>();
-        weapons.add(new Weapon(WeaponType.LASER_RAYS, 20));
-        weapons.add(new Weapon(WeaponType.PLASMA_CANONS, 40));
         Destroyer destroyer = new DestroyerBuilder()
                 .setRegisterNum("A1111AAA")
                 .setOwnerId(1)
                 .setPropellers(propellers)
                 .setCrewNum(8)
-                .setWeapons(weapons)
+                .setWeapon(new Weapon(WeaponType.LASER_RAYS, 20))
                 .setDefenses(defenses)
                 .getSpaceship();
 
@@ -136,7 +133,7 @@ public class SpaceshipDAOTest {
                 .setOwnerId(1)
                 .setPropellers(propellers)
                 .setCrewNum(8)
-                .setWeapons(weapons)
+                .setWeapon(weapons.get(0))
                 .setDefenses(defenses)
                 .getSpaceship());
         SpacialStation spacialStation = new SpacialStationBuilder()

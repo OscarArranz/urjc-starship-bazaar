@@ -69,7 +69,7 @@ public class UserDAO implements UserDAOInterface {
         return getByStringValueWithField(email, "email");
     }
 
-    public User getByStringValueWithField(String value, String field) throws DAOException {
+    private User getByStringValueWithField(String value, String field) throws DAOException {
         Client client = new Client();
 
         try {

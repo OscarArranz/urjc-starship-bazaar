@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.urjcstarshipbazaar.controllers.AddSpaceshipController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="1120.0" style="-fx-background-color: #1E1E1E;">
+         <children>
+            <HBox prefHeight="330.0" prefWidth="491.0">
+               <children>
+                  <VBox maxWidth="-Infinity">
+                     <children>
+                        <Label text="Añadir nueva nave (1/4)" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Datos basicos" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Número de registro" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Gadugi" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="registerNum" maxWidth="-Infinity" prefWidth="420.0" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="14.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Tipo de nave" textFill="WHITE">
+                           <font>
+                              <Font name="Gadugi" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="spaceshipType" onAction="#checkFighter" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets bottom="14.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <Label fx:id="crewNumText" text="Numero de tripulantes" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="crewNum" maxWidth="-Infinity" prefHeight="40.0" prefWidth="420.0" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin></TextField>
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="420.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#nextStep" styleClass="main-button" text="Continuar" />
+                              <Label text="Siguiente paso  →  Añadir propulsores" textFill="WHITE">
+                                 <font>
+                                    <Font name="Gadugi" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </VBox>
+                  <ImageView fitHeight="470.0" fitWidth="465.0" pickOnBounds="true" preserveRatio="true" rotate="53.6">
+                     <image>
+                        <Image url="@../images/icon.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="-0.69" saturation="-1.0" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="80.0" top="80.0" />
+         </padding>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@main.css" />
+      <URL value="@publishOffer.css" />
+   </stylesheets>
+</AnchorPane>
