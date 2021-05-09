@@ -1,6 +1,8 @@
 package com.urjcstarshipbazaar.controllers;
 
 import com.urjcstarshipbazaar.LoggedUser;
+import com.urjcstarshipbazaar.dao.UserDAO;
+import com.urjcstarshipbazaar.dao.exceptions.DAOException;
 import com.urjcstarshipbazaar.models.Client;
 import com.urjcstarshipbazaar.models.Review;
 import com.urjcstarshipbazaar.models.User;
@@ -29,7 +31,7 @@ public class ReviewsController implements Initializable {
     private TextField score;
 
     @FXML
-    private Button button;
+    private TextField username;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,14 +40,22 @@ public class ReviewsController implements Initializable {
 
     @FXML
     public void addReview(ActionEvent event) {
-        Review review = new Review();
-        review.setBuyer(LoggedUser.getInstance().getUser());
-        //A quién está haciendo la review?? Cómo lo obtengo??
-        //review.setVendor(user);
-        review.setScore(Double.parseDouble(score.getText()));
-        review.setComment(textArea.getText());
+        try {
+            Review review = new Review();
+            review.setBuyer(LoggedUser.getInstance().getUser());
+            User user = new UserDAO().getByStringValueWithField(username.getText(),"name");
+            review.setComment(username.getText());
+            review.setVendor(user);
+            review.setScore(Double.parseDouble(score.getText()));
+            review.setComment(textArea.getText());
 
-        ReviewService sevice = new ReviewService();
-        sevice.addReview(review);
+            ReviewService service = new ReviewService();
+            service.addReview(review);
+        }
+        catch (DAOException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
+        }
     }
 }
