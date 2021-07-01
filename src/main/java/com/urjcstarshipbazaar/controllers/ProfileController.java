@@ -14,10 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -42,23 +39,37 @@ public class ProfileController extends Controller {
     private Label originPlanet;
 
     @FXML
-    private VBox spaceshipPicker;
+    private VBox attackSpaceships;
+
+    @FXML
+    private VBox defenseSpaceships;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user=LoggedUser.getInstance().getUser();
+        User user = LoggedUser.getInstance().getUser();
         nickname.setText(user.getNickname());
         name.setText(user.getName());
         specie.setText(((Client) user).getSpecies());
         originPlanet.setText(((Client) user).getOriginPlanet());
 
-        initializeSpaceships();
+        initializeAttackSpaceships();
+        initializeDefenseSpaceships();
     }
 
-    private void initializeSpaceships() {
+    private void initializeAttackSpaceships() {
+        initializeSpaceships(false, attackSpaceships);
+    }
+
+    private void initializeDefenseSpaceships() {
+        initializeSpaceships(true, defenseSpaceships);
+    }
+
+    private void initializeSpaceships(boolean isDefense, VBox baseView) {
         SpaceshipService spaceshipService = new SpaceshipService();
         List <Spaceship> userSpaceships = spaceshipService.getLoggedUserSpaceships();
         List<Pane> spaceshipViews = new ArrayList<>();
+
+        userSpaceships.removeIf(spaceship -> spaceship.isDefense() == isDefense);
 
         for (Spaceship currentSpaceship : userSpaceships) {
             VBox spaceshipData = new VBox(10);
@@ -71,7 +82,7 @@ public class ProfileController extends Controller {
             spaceshipRegisterNum.getStyleClass().add("text");
             spaceshipRegisterNum.getStyleClass().add("num");
 
-            HBox spaceshipBox = new HBox();
+            HBox spaceshipBox = new HBox(260);
             spaceshipBox.setAlignment(Pos.CENTER_LEFT);
             spaceshipBox.getStyleClass().add("ship-box");
 
@@ -79,10 +90,23 @@ public class ProfileController extends Controller {
             spaceshipData.getChildren().add(spaceshipRegisterNum);
             spaceshipBox.getChildren().add(spaceshipData);
 
+            Button moveCategoryButton = new Button();
+            moveCategoryButton.getStyleClass().add("main-button");
+            moveCategoryButton.setOnMouseClicked(event -> {
+                spaceshipService.setIsDefense(currentSpaceship, !isDefense);
+                initializeAttackSpaceships();
+                initializeDefenseSpaceships();
+            });
+
+            if (isDefense) moveCategoryButton.setText("Mover al ataque");
+            else moveCategoryButton.setText("Mover a la defensa");
+
+            spaceshipBox.getChildren().add(moveCategoryButton);
+
             spaceshipViews.add(spaceshipBox);
         }
 
-        spaceshipPicker.getChildren().setAll(spaceshipViews);
+        baseView.getChildren().setAll(spaceshipViews);
     }
 
 }

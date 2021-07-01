@@ -8,7 +8,6 @@ import com.urjcstarshipbazaar.models.spaceships.components.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class SpaceshipDAO implements SpaceshipDAOInterface {
 
@@ -38,13 +37,14 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                 ((SpacialStation) spaceship).getMaxPassengers() + "" : "null";
         String maxLoadTons = spaceship.getClass().getSimpleName().equalsIgnoreCase("cargo") ?
                 ((Cargo) spaceship).getMaxLoadTons() + "" : "null";
+        int isDefense = spaceship.isDefense() ? 1: 0;
 
         try {
             statement.executeUpdate("INSERT INTO spaceships VALUES(null, " + spaceship.getOwnerId() +
                     SEPARATOR + STRINGMARKUP + spaceship.getClass().getSimpleName().toLowerCase() +
                     STRINGMARKUP + SEPARATOR + STRINGMARKUP + spaceship.getRegisterNum() +
                     STRINGMARKUP + SEPARATOR + spaceship.getCrewNum() + SEPARATOR + maxLoadTons + SEPARATOR +
-                    maxPassengers + ")" );
+                    maxPassengers + SEPARATOR + isDefense + ")" );
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't save spaceship basic info", throwable);
         }
@@ -90,6 +90,14 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
         return spaceships;
     }
 
+    private boolean getIsDefenseFromResults(ResultSet results) throws DAOException {
+        try {
+            return results.getInt("is_defense") == 1 ? false : true;
+        } catch (Exception throwable) {
+            throw new DAOException("Couldn't get spaceship", throwable);
+        }
+    }
+
     public Spaceship buildSpaceshipFromResults(ResultSet results) throws DAOException {
         Spaceship spaceship = new Cargo();
 
@@ -131,6 +139,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     .setCrewNum(results.getInt("crew_num"))
                     .setMaxLoadTons(results.getDouble("max_load_tons"))
                     .setDefense(defense)
+                    .setIsDefense(getIsDefenseFromResults(results))
                     .getSpaceship();
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't get cargo", throwable);
@@ -156,6 +165,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     .setCrewNum(results.getInt("crew_num"))
                     .setWeapon(weapon)
                     .setDefenses(defenses)
+                    .setIsDefense(getIsDefenseFromResults(results))
                     .getSpaceship();
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't get cargo", throwable);
@@ -181,6 +191,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     .setCrewNum(results.getInt("crew_num"))
                     .setWeapons(weapons)
                     .setDefense(defense)
+                    .setIsDefense(getIsDefenseFromResults(results))
                     .getSpaceship();
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't get cargo", throwable);
@@ -207,6 +218,7 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     .setMaxPassengers(results.getInt("max_passengers"))
                     .setDefenses(defenses)
                     .setSpaceships(spaceships)
+                    .setIsDefense(getIsDefenseFromResults(results))
                     .getSpaceship();
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't get cargo", throwable);
@@ -480,6 +492,23 @@ public class SpaceshipDAO implements SpaceshipDAOInterface {
                     + SEPARATOR + shield.getRequiredEnergyGj() +")");
         } catch (SQLException throwable) {
             throw new DAOException("Couldn't save shield", throwable);
+        }
+    }
+
+    public void setIsDefense(String registerNum, boolean isDefense) throws DAOException {
+        int newIsDefense = isDefense ? 1 : 0;
+
+        try {
+            Connection connection = DriverManager.getConnection(CONNECTION_URL);
+            Statement statement = connection.createStatement();
+
+            statement.executeUpdate("UPDATE spaceships SET is_defense =" + newIsDefense + " WHERE register_num = '"
+             + registerNum + "'");
+
+            statement.close();
+            connection.close();
+        } catch (SQLException throwable) {
+            throw new DAOException("Couldn't change isDefense", throwable);
         }
     }
 

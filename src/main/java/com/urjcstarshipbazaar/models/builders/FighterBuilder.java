@@ -17,9 +17,10 @@ public class FighterBuilder implements SpaceshipBuilder {
     private List<Propeller> propellers;
     private List<Weapon> weapons;
     private DefenseSystem defense;
+    private boolean isDefense;
 
     public Fighter getSpaceship() {
-        return new Fighter(id, registerNum, ownerId, propellers, weapons, defense);
+        return new Fighter(id, registerNum, ownerId, propellers, weapons, defense, isDefense);
     }
 
     @Override
@@ -49,6 +50,12 @@ public class FighterBuilder implements SpaceshipBuilder {
     @Override
     public FighterBuilder setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    @Override
+    public FighterBuilder setIsDefense(boolean isDefense) {
+        this.isDefense = isDefense;
         return this;
     }
 

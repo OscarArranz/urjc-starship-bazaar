@@ -12,20 +12,24 @@ public abstract class Spaceship {
     private int ownerId;
     private List<Propeller> propellers;
     private int crewNum;
+    private boolean isDefense;
 
-    public Spaceship(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum) {
+    public Spaceship(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum
+            , boolean isDefense) {
         this.id = id;
         this.registerNum = registerNum;
         this.ownerId = ownerId;
         this.propellers = propellers;
         this.crewNum = crewNum;
+        this.isDefense = isDefense;
     }
 
-    public Spaceship(String registerNum, int ownerId, List<Propeller> propellers, int crewNum) {
+    public Spaceship(String registerNum, int ownerId, List<Propeller> propellers, int crewNum, boolean isDefense) {
         this.registerNum = registerNum;
         this.ownerId = ownerId;
         this.propellers = propellers;
         this.crewNum = crewNum;
+        this.isDefense = isDefense;
     }
 
     public Spaceship() {
@@ -50,6 +54,10 @@ public abstract class Spaceship {
 
     public int getCrewNum() {
         return crewNum;
+    }
+
+    public boolean isDefense() {
+        return this.isDefense;
     }
 
     @Override
