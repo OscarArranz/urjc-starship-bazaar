@@ -13,16 +13,18 @@ public class SpacialStation extends Spaceship {
     private List<DefenseSystem> defenses;
 
     public SpacialStation(int id, String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
-                          int maxPassengers, List<Spaceship> spaceships, List<DefenseSystem> defenses) {
-        super(id, registerNum, ownerId, propellers, crewNum);
+                          int maxPassengers, List<Spaceship> spaceships, List<DefenseSystem> defenses,
+                          boolean isDefense) {
+        super(id, registerNum, ownerId, propellers, crewNum, isDefense);
         this.maxPassengers = maxPassengers;
         this.spaceships = spaceships;
         this.defenses = defenses;
     }
 
     public SpacialStation(String registerNum, int ownerId, List<Propeller> propellers, int crewNum,
-                          int maxPassengers, List<Spaceship> spaceships, List<DefenseSystem> defenses) {
-        super(registerNum, ownerId, propellers, crewNum);
+                          int maxPassengers, List<Spaceship> spaceships, List<DefenseSystem> defenses,
+                          boolean isDefense) {
+        super(registerNum, ownerId, propellers, crewNum, isDefense);
         this.maxPassengers = maxPassengers;
         this.spaceships = spaceships;
         this.defenses = defenses;

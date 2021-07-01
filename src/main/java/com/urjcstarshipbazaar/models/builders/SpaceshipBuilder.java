@@ -16,4 +16,6 @@ public interface SpaceshipBuilder {
 
     SpaceshipBuilder setId(int id);
 
+    SpaceshipBuilder setIsDefense(boolean isDefense);
+
 }

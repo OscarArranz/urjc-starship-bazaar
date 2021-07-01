@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -29,7 +31,10 @@ public class AddSpaceshipController extends Controller {
     private TextField crewNum;
 
     @FXML
-    private ComboBox spaceshipType;
+    private ComboBox<SpaceshipType> spaceshipType;
+
+    @FXML
+    private CheckBox isDefense;
 
     private SpaceshipBuilder spaceshipBuilder;
 
@@ -42,7 +47,7 @@ public class AddSpaceshipController extends Controller {
 
     @FXML
     private void nextStep(ActionEvent event) {
-        SpaceshipType type = (SpaceshipType) spaceshipType.getValue();
+        SpaceshipType type = spaceshipType.getValue();
 
         switch (type) {
             case CARGO: spaceshipBuilder = new CargoBuilder();
@@ -64,9 +69,11 @@ public class AddSpaceshipController extends Controller {
         }
 
         spaceshipBuilder.setOwnerId(LoggedUser.getInstance().getUser().getId());
+
         if(!crewNum.getText().isEmpty()) spaceshipBuilder.setCrewNum(Integer.parseInt(crewNum.getText()));
         else spaceshipBuilder.setCrewNum(1);
-        spaceshipBuilder.setRegisterNum(registerNum.getText());
+
+        spaceshipBuilder.setRegisterNum(registerNum.getText()).setIsDefense(isDefense.isSelected());
 
         AddPropellersController addPropellersController =
                 (AddPropellersController) getMainController().load("addPropellers");

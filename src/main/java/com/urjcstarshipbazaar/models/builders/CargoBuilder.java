@@ -16,9 +16,10 @@ public class CargoBuilder implements SpaceshipBuilder {
     private int crewNum;
     private double maxLoadTons;
     private DefenseSystem defense;
+    private boolean isDefense;
 
     public Cargo getSpaceship() {
-        return new Cargo(id, registerNum, ownerId, propellers, crewNum, maxLoadTons, defense);
+        return new Cargo(id, registerNum, ownerId, propellers, crewNum, maxLoadTons, defense, isDefense);
     }
 
     public CargoBuilder setRegisterNum(String registerNum) {
@@ -45,6 +46,12 @@ public class CargoBuilder implements SpaceshipBuilder {
     @Override
     public CargoBuilder setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    @Override
+    public CargoBuilder setIsDefense(boolean isDefense) {
+        this.isDefense = isDefense;
         return this;
     }
 

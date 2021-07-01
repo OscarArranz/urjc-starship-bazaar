@@ -16,9 +16,10 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     private int crewNum;
     private Weapon weapon;
     private List<DefenseSystem> defenses;
+    private boolean isDefense;
 
     public Destroyer getSpaceship() {
-        return new Destroyer(id, registerNum, ownerId, propellers, crewNum, weapon, defenses);
+        return new Destroyer(id, registerNum, ownerId, propellers, crewNum, weapon, defenses, isDefense);
     }
 
     @Override
@@ -48,6 +49,11 @@ public class DestroyerBuilder implements SpaceshipBuilder {
     @Override
     public DestroyerBuilder setPropellers(List<Propeller> propellers) {
         this.propellers = propellers;
+        return this;
+    }
+
+    public DestroyerBuilder setIsDefense(boolean isDefense) {
+        this.isDefense = isDefense;
         return this;
     }
 

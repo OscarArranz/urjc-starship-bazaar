@@ -88,14 +88,42 @@
             </HBox>
          </children>
       </VBox>
-      <Label layoutX="551.0" layoutY="62.0" prefHeight="35.0" prefWidth="68.0" text="Naves" textFill="WHITE">
+      <Label layoutX="551.0" layoutY="62.0" prefHeight="35.0" prefWidth="175.0" text="Naves atacantes" textFill="WHITE">
          <font>
             <Font name="Gadugi" size="24.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="551.0" layoutY="132.0" prefHeight="489.0" prefWidth="505.0" style="-fx-padding: 0;">
+      <ScrollPane layoutX="551.0" layoutY="132.0" prefHeight="196.0" prefWidth="505.0" style="-fx-padding: 0;" AnchorPane.topAnchor="120.0">
          <content>
-            <VBox fx:id="spaceshipPicker" prefHeight="489.0" prefWidth="505.0" spacing="20.0" style="-fx-background-color: #1E1E1E;" stylesheets="@publishOffer.css">
+            <VBox fx:id="attackSpaceships" prefHeight="196.0" prefWidth="505.0" spacing="20.0" style="-fx-background-color: #303030;" stylesheets="@publishOffer.css">
+               <padding>
+                  <Insets bottom="40.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label layoutX="551.0" layoutY="356.0" prefHeight="35.0" prefWidth="190.0" text="Naves defensoras" textFill="WHITE">
+         <font>
+            <Font name="Gadugi" size="24.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="551.0" layoutY="412.0" prefHeight="196.0" prefWidth="505.0" style="-fx-padding: 0;" AnchorPane.topAnchor="412.0">
+         <content>
+            <VBox fx:id="defenseSpaceships" prefHeight="196.0" prefWidth="505.0" spacing="20.0" style="-fx-background-color: #303030;" stylesheets="@publishOffer.css">
+               <padding>
+                  <Insets bottom="40.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label layoutX="90.0" layoutY="356.0" prefHeight="35.0" prefWidth="182.0" text="Nuevos desafíos" textFill="WHITE">
+         <font>
+            <Font name="Gadugi" size="24.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="90.0" layoutY="412.0" prefHeight="196.0" prefWidth="400.0" style="-fx-padding: 0;">
+         <content>
+            <VBox fx:id="spaceshipPicker2" prefHeight="196.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: #303030;" stylesheets="@publishOffer.css">
                <padding>
                   <Insets bottom="40.0" right="20.0" />
                </padding>

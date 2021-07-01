@@ -17,9 +17,11 @@ public class SpacialStationBuilder implements SpaceshipBuilder {
     private int maxPassengers;
     private List<Spaceship> spaceships;
     private List<DefenseSystem> defenses;
+    private boolean isDefense;
 
     public SpacialStation getSpaceship() {
-        return new SpacialStation(id, registerNum, ownerId, propellers, crewNum, maxPassengers, spaceships, defenses);
+        return new SpacialStation(id, registerNum, ownerId, propellers, crewNum, maxPassengers, spaceships, defenses,
+                isDefense);
     }
 
     @Override
@@ -49,6 +51,12 @@ public class SpacialStationBuilder implements SpaceshipBuilder {
     @Override
     public SpacialStationBuilder setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    @Override
+    public SpacialStationBuilder setIsDefense(boolean isDefense) {
+        this.isDefense = isDefense;
         return this;
     }
 

@@ -17,6 +17,7 @@ create table spaceships(
     crew_num int not null,
     max_load_tons real,
     max_passengers int,
+    is_defense int,
 
     foreign key(owner_id) references users(id) on delete cascade on update cascade
 );
@@ -59,56 +60,10 @@ create table armors(
     foreign key(spaceship_register_num) references spaceships(register_num) on delete cascade on update cascade
 );
 
-create table transactions(
-    id integer primary key not null unique,
-    vendor_id integer not null,
-    buyer_id integer not null,
-    price_cents integer not null,
-
-    foreign key(vendor_id) references users(id) on delete no action on update cascade,
-    foreign key(buyer_id) references users(id) on delete no action on update cascade
-);
-
-create table transaction_spaceship(
-    transaction_id integer not null, 
-    spaceship_register_num text not null,
-
-    foreign key(transaction_id) references transactions(id) on delete cascade on update cascade,
-    foreign key(spaceship_register_num) references spaceships(register_num) on delete cascade on update cascade
-);
-
 create table station_spaceship(
     station_register_num integer not null,
     spaceship_register_num text not null,
 
     foreign key(station_register_num) references spaceships(register_num) on delete cascade on update cascade,
     foreign key(spaceship_register_num) references spaceships(register_num) on delete cascade on update cascade
-);
-
-create table offers(
-    id integer primary key not null unique,
-    vendor_id integer not null,
-    price_cents integer not null,
-    deadline text not null,
-
-    foreign key(vendor_id) references users(id) on delete cascade on update cascade
-);
-
-create table offer_spaceship(
-    offer_id integer not null, 
-    spaceship_register_num text not null,
-
-    foreign key(offer_id) references offers(id) on delete cascade on update cascade,
-    foreign key(spaceship_register_num) references spaceships(register_num) on delete cascade on update cascade
-);
-
-create table reviews(
-    id integer primary key not null unique,
-    comment text not null,
-    score real not null,
-    vendor_id integer not null,
-    buyer_id integer not null,
-
-    foreign key(vendor_id) references users(id) on delete cascade on update cascade,
-    foreign key(buyer_id) references users(id) on delete cascade on update cascade
 );

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SpaceshipService {
 
-    private SpaceshipDAO spaceshipDAO;
+    private final SpaceshipDAO spaceshipDAO;
 
     public SpaceshipService() {
         spaceshipDAO = new SpaceshipDAO();
@@ -34,6 +34,16 @@ public class SpaceshipService {
     public boolean save(Spaceship spaceship) {
         try {
             spaceshipDAO.saveSpaceship(spaceship);
+            return true;
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setIsDefense(Spaceship spaceship, boolean isDefense) {
+        try {
+            spaceshipDAO.setIsDefense(spaceship.getRegisterNum(), isDefense);
             return true;
         } catch (DAOException e) {
             e.printStackTrace();
